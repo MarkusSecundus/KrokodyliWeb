@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrokodyliWeb.Backend", "KrokodyliWeb.Backend\KrokodyliWeb.Backend.csproj", "{D234C8AC-6BEE-44AF-AE34-3E3F24EBBB34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KrokodyliWeb.Frontend", "KrokodyliWeb.Frontend\KrokodyliWeb.Frontend.csproj", "{40AECBC7-EC85-419F-915E-7A1A779CD658}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D234C8AC-6BEE-44AF-AE34-3E3F24EBBB34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D234C8AC-6BEE-44AF-AE34-3E3F24EBBB34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D234C8AC-6BEE-44AF-AE34-3E3F24EBBB34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D234C8AC-6BEE-44AF-AE34-3E3F24EBBB34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40AECBC7-EC85-419F-915E-7A1A779CD658}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40AECBC7-EC85-419F-915E-7A1A779CD658}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40AECBC7-EC85-419F-915E-7A1A779CD658}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40AECBC7-EC85-419F-915E-7A1A779CD658}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DE3DDCFA-264C-4DFD-9A35-BE7A15A23569}
+	EndGlobalSection
+EndGlobal
