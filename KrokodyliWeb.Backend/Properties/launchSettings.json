@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "KrokodyliWeb.Backend": {
+      "commandName": "Project",
+      "commandLineArgs": "--eventlist \".\\\\events_list.json\" "
+    }
+  }
+}
