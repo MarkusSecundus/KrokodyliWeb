@@ -1,3 +1,3 @@
 # KrokodyliWeb
 
-(https://markussecundus.github.io/KrokodyliWeb/)[https://markussecundus.github.io/KrokodyliWeb/]
+[GitHub Page](https://markussecundus.github.io/KrokodyliWeb/)
