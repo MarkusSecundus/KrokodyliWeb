@@ -22,12 +22,11 @@ jobs:
     
     - name: Publish Frontend project
       run: dotnet publish KrokodyliWeb.Frontend -c Release -o release --nologo
-    - name: Change base-tag in index.html from / to KrokodyliWeb
+    - name: Change base-tag in index.html from / to /KrokodyliWeb
       run: sed -i 's/<base href="\/" \/>/<base href="\/KrokodyliWeb\/" \/>/g' release/wwwroot/index.html
       
     - name: copy index.html to 404.html
       run: cp release/wwwroot/index.html release/wwwroot/404.html
-      
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
     - name: Mark all files as binary
