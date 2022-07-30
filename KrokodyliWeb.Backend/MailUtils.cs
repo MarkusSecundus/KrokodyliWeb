@@ -17,4 +17,5 @@ namespace KrokodyliWeb.Backend
                 self.RemoveFlags(uid, MessageFlags.Seen, true);
         }
     }
+
 }
