@@ -30,6 +30,8 @@ jobs:
       
     - name: Add .nojekyll file
       run: touch release/wwwroot/.nojekyll
+    - name: Mark all files as binary
+      run:  echo "* binary" > "release/wwwroot/.gitattributes"
       
     - name: Commit wwwroot to Github Pages
       uses: JamesIves/github-pages-deploy-action@3.7.1
