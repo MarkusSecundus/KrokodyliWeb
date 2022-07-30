@@ -10,8 +10,8 @@ namespace KrokodyliWeb.Backend
     {
         public class CmdArgs
         {
-            [Option('e', "eventlist", Required = true, HelpText = "Path to the json file listing the events")]
-            public string EventListPath { get; init; } = null!;
+            [Option('d', "data", Required = true, HelpText = "Path to the json file containing data")]
+            public string DataFilePath { get; init; } = null!;
             [Option('h', "imaphostname", Required = false, HelpText = "Hostname of the imap server")]
             public string ImapHostName { get; init; } = "imap.gmail.com";
             [Option('p', "imapport", Required = false, HelpText = "Port of the imap server")]
