@@ -25,7 +25,7 @@ jobs:
     - id: create_sed_input
       uses: mathiasvr/command-output@v1
       with: 
-        run: printf "%s%s%s" 's/<base href="\/" \/>/<base href="\/' ${{ github.event.repository.name }} '\/" \/>/g' 
+        run: printf "'%s%s%s'" 's/<base href="\/" \/>/<base href="\/' ${{ github.event.repository.name }} '\/" \/>/g' 
     - name: Change base-tag in index.html from / to /KrokodyliWeb
       run: sed -i ${{ steps.create_sed_input.outputs.stdout }} release/wwwroot/index.html
       
