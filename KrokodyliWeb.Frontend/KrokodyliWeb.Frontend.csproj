@@ -7,12 +7,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\zvadlo_novacci2020_web.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.6" PrivateAssets="all" />
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj"/>
-		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj"/>
+		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj" />
+		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\resources\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="wwwroot\zvadlo_novacci2020_web.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\index.html">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\resources\zvadlo_novacci2020_web.jpg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 </Project>
