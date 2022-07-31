@@ -23,7 +23,7 @@ jobs:
     - name: Publish Frontend project
       run: dotnet publish KrokodyliWeb.Frontend -c Release -o release --nologo
     - name: Change base-tag in index.html from / to /KrokodyliWeb
-      run: sed -i ${{ join(['s/<base href="\/" \/>/<base href="\/', github.event.repository.name }},'\/" \/>/g'], '')}} release/wwwroot/index.html
+      run: sed -i ${{ join(['s/<base href="\/" \/>/<base href="\/', github.event.repository.name,'\/" \/>/g'], '')}} release/wwwroot/index.html
       
     - name: copy index.html to 404.html
       run: cp release/wwwroot/index.html release/wwwroot/404.html
