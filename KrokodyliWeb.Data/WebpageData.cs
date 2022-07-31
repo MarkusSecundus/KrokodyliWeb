@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KrokodyliWeb.Backend
+namespace KrokodyliWeb.Data
 {
-    internal class WebpageData
+    public class WebpageData
     {
         public List<EventInfo>? Events { get; set; }
 

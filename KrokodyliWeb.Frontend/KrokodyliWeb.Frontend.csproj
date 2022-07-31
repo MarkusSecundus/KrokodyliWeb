@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.6" PrivateAssets="all" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj"/>
+		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj"/>
+	</ItemGroup>
 </Project>

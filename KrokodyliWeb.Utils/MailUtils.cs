@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KrokodyliWeb.Backend
+namespace KrokodyliWeb.Utils
 {
-    internal static class MailUtils
+    public static class MailUtils
     {
         public static void MarkRead(this IMailFolder self, UniqueId uid, bool read=true)
         {
