@@ -27,10 +27,11 @@ namespace KrokodyliWeb.Data
 
             public string Location { get; set; } = null!;
 
-            public DateTimeInterval Time {get; set;}
+            public DateTimeInterval Time { get; set; }
 
             public string Price { get; set; } = null!;
 
             public string WayOfPayingInfo { get; set; } = null!;
+        }
     }
 }
