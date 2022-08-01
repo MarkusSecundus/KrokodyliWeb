@@ -8,7 +8,10 @@ namespace KrokodyliWeb.Data
 {
     public class WebpageData
     {
-        public List<EventInfo>? Events { get; set; }
+        public List<EventInfo> Events { get; set; } = new();
+        public List<ContactsInfo> Contacts { get; set; } = new();
+
+        public List<SummerCampInfo> SummerCamps { get; set; } = new();
 
         public class EventInfo
         {
@@ -32,6 +35,14 @@ namespace KrokodyliWeb.Data
             public string Price { get; set; } = null!;
 
             public string WayOfPayingInfo { get; set; } = null!;
+        }
+
+        public class ContactsInfo
+        {
+            public string PersonName { get; set; } = null!;
+            public string PhoneNumber { get; set; } = null!;
+            public string Email { get; set; } = null!;
+
         }
     }
 }
