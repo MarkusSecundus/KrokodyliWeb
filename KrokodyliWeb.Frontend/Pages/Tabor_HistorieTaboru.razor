@@ -1,6 +1,28 @@
 ﻿@page "/summer-camp/history"
 
-<h3>Tábor - Historie táborů</h3>
+@inject WebpageData data
+
+<h3>Historie táborů</h3>
+
+<table class="table table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+            <th>Rok</th>
+            <th>Místo konání</th>
+            <th>CTH</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var camp in data.SummerCamps)
+        {
+            <tr>
+                <td>@camp.Year</td>
+                <td>@camp.Location</td>
+                <td>@camp.CTH</td>
+            </tr>
+        }
+        </tbody>
+</table>
 
 @code {
 

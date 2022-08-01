@@ -35,6 +35,8 @@ namespace KrokodyliWeb.Data
             public string Price { get; set; } = null!;
 
             public string WayOfPayingInfo { get; set; } = null!;
+
+            public string CTH { get; set; } = null!;
         }
 
         public class ContactsInfo
