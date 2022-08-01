@@ -1,6 +1,9 @@
+using KrokodyliWeb.Data;
 using KrokodyliWeb.Frontend;
+using KrokodyliWeb.Utils;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using System.Text.Json;
 
 namespace KrokodyliWeb.Frontend
 {
@@ -13,6 +16,15 @@ namespace KrokodyliWeb.Frontend
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+            builder.Services.AddSingleton<WebpageConfig>(sp => new());
+            builder.Services.AddSingleton<WebpageData>(sp =>
+            {
+                return new();
+                /*var cfg = sp.GetRequiredService<WebpageConfig>();
+                var httpClient = sp.GetRequiredService<HttpClient>();
+                return httpClient.GetJsonAsync<WebpageData>(cfg.DataFileURI).Result;*/
+            });
 
             await builder.Build().RunAsync();
         }
