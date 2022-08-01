@@ -46,6 +46,13 @@ namespace KrokodyliWeb.Backend
 
         public void Run()
         {
+            data.Contacts.Add(new()
+            {
+                Email = "krokodyli@skaut.cz",
+                PhoneNumber = "605485388",
+                PersonName = "Martina Barvířová"
+            });
+
 
             SaveWebpageData();
         }
