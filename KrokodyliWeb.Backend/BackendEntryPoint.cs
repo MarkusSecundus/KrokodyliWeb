@@ -74,7 +74,7 @@ namespace KrokodyliWeb.Backend
         private void SaveWebpageData()
         {
             using var file = File.OpenWrite(args.DataFilePath);
-            JsonSerializer.Serialize(file, data);
+            JsonSerializer.Serialize(file, data, options: new() { WriteIndented=true});
         }
 
         private static void ProcessMails(CmdArgs args)
