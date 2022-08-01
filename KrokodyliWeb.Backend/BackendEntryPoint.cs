@@ -5,6 +5,7 @@ using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
 using MailKit.Security;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace KrokodyliWeb.Backend
@@ -59,6 +60,8 @@ namespace KrokodyliWeb.Backend
 
 
 
+        private static readonly JsonSerializerOptions DeserializeOptions = new() { WriteIndented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+
         private static WebpageData GetWebpageData(CmdArgs args)
         {
             try
@@ -74,7 +77,7 @@ namespace KrokodyliWeb.Backend
         private void SaveWebpageData()
         {
             using var file = File.OpenWrite(args.DataFilePath);
-            JsonSerializer.Serialize(file, data, options: new() { WriteIndented=true});
+            JsonSerializer.Serialize(file, data, options: DeserializeOptions);
         }
 
         private static void ProcessMails(CmdArgs args)
