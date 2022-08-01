@@ -21,7 +21,7 @@ jobs:
       run: dotnet build KrokodyliWeb.Backend -o ./backend_build
     - run: mkdir data_repo
     - name: Run backend 
-      run: dotnet ./backend_build/KrokodyliWeb.Backend --data './data_repo/data.json' --mailusername 'USER_PLACEHOLDER' --mailpassword 'PASSWD_PLACEHOLDER'
+      run: dotnet ./backend_build/KrokodyliWeb.Backend.dll --data './data_repo/data.json' --mailusername 'USER_PLACEHOLDER' --mailpassword 'PASSWD_PLACEHOLDER'
       
     - name: Commit data_repo to Data branch
       uses: JamesIves/github-pages-deploy-action@3.7.1
