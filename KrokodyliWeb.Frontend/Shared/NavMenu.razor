@@ -13,17 +13,22 @@
 </div>
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <nav class="flex-column">
+    <nav class="nav nav-pills flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All" @ref="Index" @onclick="()=>SelectedNavLink=Index">
                 <span class="" aria-hidden="true"></span> Domů
             </NavLink>
         </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="about-us" Match="NavLinkMatch.Prefix" @ref="AboutUs" @onclick="()=>SelectedNavLink=AboutUs">
-                <span class="" aria-hidden="true"></span> O nás
+        <div class="nav-item dropdown">
+            <NavLink class="nav-link dropdown-toggle" data-toggle="dropdown" href="about-us" role="button" aria-haspopup="true" aria-expanded="true" Match="NavLinkMatch.Prefix" @ref="AboutUs" @onclick="()=>SelectedNavLink=AboutUs">
+                O nás
             </NavLink>
-            @if(IsSelected(AboutUs)){
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="about-us/our-team">Naše parta</a>
+                <a class="dropdown-item" href="about-us/our-work">Naše činnost</a>
+                <a class="dropdown-item" href="about-us/where-to-find-us">Kde nás najdete</a>
+            </div>
+            @*if(false && IsSelected(AboutUs)){
                 <NavLink class="expand-menu" href="about-us/our-team" Match="NavLinkMatch.Prefix">
                     <span class="" aria-hidden="true"></span> Naše parta
                 </NavLink>
@@ -33,7 +38,7 @@
                 <NavLink class="expand-menu" href="about-us/where-to-find-us" Match="NavLinkMatch.Prefix">
                     <span class="" aria-hidden="true"></span> Kde nás najdete
                 </NavLink>
-            }
+            }*@
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="events" Match="NavLinkMatch.Prefix" @ref="Events" @onclick="()=>SelectedNavLink=Events">
@@ -95,14 +100,22 @@
         </div>
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="contacts" Match="NavLinkMatch.Prefix" @ref="Contacts" @onclick="()=>SelectedNavLink=Contacts"> 
-                <span class="" aria-hidden="true"></span> Kontakt
+                <span class="" aria-hidden="true"></span> Kontakty
             </NavLink>
         </div>
+        @if(data.Contacts.Count > 0)
+        {
         <div class="nav-item px-3">
             <NavLink class="nav-link" >
-                <span class="" aria-hidden="true"></span> URI: @(navigation.Uri)
+                <span style="font-weight: bold;">Kontakt</span>
+                <br/>
+                <span>@data.Contacts[0].PersonName</span>
+                <span>@data.Contacts[0].PhoneNumber</span>
+                <br/>
+                <span>@data.Contacts[0].Email</span>
             </NavLink>
         </div>
+        }
     </nav>
 </div>
 
