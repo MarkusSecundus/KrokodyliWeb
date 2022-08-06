@@ -1,34 +1,10 @@
-﻿html {
+﻿body {
+    font-family: Bahnschrift8;
+    color: white;
     background-color: #ffffff;
     background-image: url('../resources/bg.jpg');
     background-repeat: no-repeat;
     background-size: cover !important;
-}
-
-/* Hero img
-.hero-image {
-    background-image: url('Header.png');
-    background-color: #cccccc;
-    height: 300px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.hero-text {
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-}
-end */
-
-body {
-    /* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap'); */
-    font-family: Bahnschrift8;
-    color: white;
 }
 
 img {
@@ -64,13 +40,13 @@ ol, ul {
     transition: 0.4s;
 }
 
-    #uppermenu_btn:hover {
-        transition: 0.4s;
-        background-color: #0db534;
-        margin: 9px;
-        padding: 6px 9px;
-        color: white;
-    }
+#uppermenu_btn:hover {
+    transition: 0.4s;
+    background-color: #0db534;
+    margin: 9px;
+    padding: 6px 9px;
+    color: white;
+}
 
 .uppermenu {
     background-color: #156c8000;
@@ -78,10 +54,10 @@ ol, ul {
     border-bottom: solid 2px white;
 }
 
-.br {
+/* .br {
     display: block;
     margin-bottom: 9px;
-}
+} */
 
 @font-face {
     font-family: Bahnschrift8;
