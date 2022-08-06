@@ -42,7 +42,7 @@ ol, ul {
 
 #uppermenu_btn:hover {
     transition: 0.4s;
-    background-color: #0db534;
+    background-color: #0A9F2D50;
     margin: 9px;
     padding: 6px 9px;
     color: white;
@@ -54,10 +54,10 @@ ol, ul {
     border-bottom: solid 2px white;
 }
 
-/* .br {
+.br {
     display: block;
     margin-bottom: 9px;
-} */
+}
 
 @font-face {
     font-family: Bahnschrift8;
