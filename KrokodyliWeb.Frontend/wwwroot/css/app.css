@@ -8,7 +8,7 @@
 }
 
 img {
-    border: solid 5px #0A9F2D;
+    border: solid 5px #ffffff;
     border-radius: 5px;
 }
 
@@ -17,13 +17,13 @@ ol, ul {
 }
 
 #title {
-    color: white;
-    font-size: 5vw;
+    color: #cd0000;
+    font-size: 4vw;
     margin-bottom: 15px;
 }
 
-#linkhref {
-    color: #32d70d;
+.linkhref {
+    color: #cd0000;
 }
 
 #uppermenu_btn {
@@ -52,6 +52,7 @@ ol, ul {
     background-color: #156c8000;
     margin-top: 0px;
     border-bottom: solid 2px white;
+    text-align: center;
 }
 
 .br {
