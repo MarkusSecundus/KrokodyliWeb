@@ -2,7 +2,7 @@
     background-color: #ffffff;
     background-image: url('../resources/bg.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover !important;
 }
 
 /* Hero img
@@ -85,5 +85,5 @@ ol, ul {
 
 @font-face {
     font-family: Bahnschrift8;
-    src: url(''../resources/BAHNSCHRIFT 8.TTF'');
+    src: url("../resources/B8.TTF");
 }
