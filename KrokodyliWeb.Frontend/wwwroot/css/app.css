@@ -64,3 +64,13 @@ ol, ul {
     font-family: Bahnschrift8;
     src: url("../resources/B8.TTF");
 }
+
+.centered {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.centered > * {
+    text-align: center;
+}
