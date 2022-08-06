@@ -1,22 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="page" style="background-image:  linear-gradient(180deg, #874812 0%, #c21906 70%)">
-    <div style="background-image: linear-gradient(180deg, #676205 0%, #466905 70%)">
-        <NavMenu />
-    </div>
+<div class="page">
+    <UpperMenu />
 
-    <main >
-        <div style="position: relative; text-align: center; width: 838px; height: 240px;">
-            <img src="resources/KrokodyliLogo.png" alt="Krokodýli-Logo" width="838" height="240" style="position: absolute; left:0px;">
-                <div style="position: absolute; top: 8px; left: 16px; text-align: left;">
-                    <div style="font-weight: bolder; margin: 0px; font-size: 26px; color: #db9d0d">Krokodýli</div>
-                    <div style="font-weight: bolder; margin:0px; color: white;">JUNÁK - český skaut, z.s.</div>
-                </div>
-            <img />
-        </div>
-
-        <article style="margin-top: 10px;">
-            @Body
-        </article>
-    </main>
+        @Body
 </div>
