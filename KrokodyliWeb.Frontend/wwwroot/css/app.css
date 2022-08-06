@@ -22,8 +22,8 @@ ol, ul {
     margin-bottom: 15px;
 }
 
-#linkhref {
-    color: #32d70d;
+.linkhref {
+    color: #cd0000;
 }
 
 #uppermenu_btn {
