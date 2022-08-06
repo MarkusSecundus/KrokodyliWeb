@@ -8,7 +8,7 @@
 }
 
 img {
-    border: solid 5px #0A9F2D;
+    border: solid 5px #ffffff;
     border-radius: 5px;
 }
 
@@ -17,13 +17,13 @@ ol, ul {
 }
 
 #title {
-    color: white;
-    font-size: 5vw;
+    color: #cd0000;
+    font-size: 4vw;
     margin-bottom: 15px;
 }
 
-#linkhref {
-    color: #32d70d;
+.linkhref {
+    color: #cd0000;
 }
 
 #uppermenu_btn {
@@ -42,7 +42,7 @@ ol, ul {
 
 #uppermenu_btn:hover {
     transition: 0.4s;
-    background-color: #0db534;
+    background-color: #0A9F2D50;
     margin: 9px;
     padding: 6px 9px;
     color: white;
@@ -52,14 +52,25 @@ ol, ul {
     background-color: #156c8000;
     margin-top: 0px;
     border-bottom: solid 2px white;
+    text-align: center;
 }
 
-/* .br {
+.br {
     display: block;
     margin-bottom: 9px;
-} */
+}
 
 @font-face {
     font-family: Bahnschrift8;
     src: url("../resources/B8.TTF");
+}
+
+.centered {
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.centered > * {
+    text-align: center;
 }
