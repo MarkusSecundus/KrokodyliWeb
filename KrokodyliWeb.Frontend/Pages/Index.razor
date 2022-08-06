@@ -1,14 +1,12 @@
 ﻿@page "/"
 @page "/index"
 
-<div class="centered">
-    <img src="./resources/zvadlo_novacci2020_web.jpg" alt="Náborový plakát" />
-<div>
-    SCHŮZKY PROBÍHAJÍ V <a href="@KlubovnaLocationHyperlink">KLUBOVNĚ VE VELKÉM ZBOŽÍ</a>.
-</div>
-</div>
-
-
+<center>
+    <p><img src="./resources/zvadlo_novacci2020_web.jpg" alt="Náborový plakát" /></p>
+    <bold>SCHŮZKY PROBÍHAJÍ V <a class="linkhref" href="@KlubovnaLocationHyperlink">KLUBOVNĚ VE VELKÉM ZBOŽÍ</a>.</bold>
+    <br />
+    <p><img src="./resources/pozvanka.png" alt="Pozvánka" /></p>
+</center>
 
 @code{
     private const string KlubovnaLocationHyperlink = "https://mapy.cz/zakladni?x=15.1027250&y=50.1599139&z=19&base=ophoto&source=coor&id=15.103049039807956%2C50.15979253572533";
