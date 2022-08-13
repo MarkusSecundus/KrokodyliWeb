@@ -1,3 +1,6 @@
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 using KrokodyliWeb.Data;
 using KrokodyliWeb.Frontend;
 using KrokodyliWeb.Utils;
@@ -25,6 +28,13 @@ namespace KrokodyliWeb.Frontend
                 var httpClient = sp.GetRequiredService<HttpClient>();
                 return httpClient.GetJsonAsync<WebpageData>(cfg.DataFileURI).Result;*/
             });
+
+            builder.Services.AddBlazorise(options =>
+                    {
+                        options.Immediate = true;
+                    })
+                    .AddBootstrapProviders()
+                    .AddFontAwesomeIcons();
 
             await builder.Build().RunAsync();
         }

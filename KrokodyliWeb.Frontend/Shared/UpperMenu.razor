@@ -1,4 +1,4 @@
-﻿
+﻿<!--
 <div style="margin:auto; width:54%;">
     <ul class="nav nav-pills uppermenu" >
         <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="index">Domů</a></li>
@@ -22,7 +22,43 @@
         <h1 style="font-size:50px">Krokodýli</h1>
         <h3>JUNÁK - český skaut, z.s.</h3>
     </center>
-</div>
+</div>-->
+
+
+<Div >
+    <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" >
+        <BarToggler/>
+        <BarMenu>
+            <BarStart>
+                <BarItem><BarLink To="index">Domů</BarLink></BarItem>
+                <BarItem><BarLink To="about-us">O nás</BarLink></BarItem>
+                <BarItem><BarLink To="events">Akce</BarLink></BarItem>
+                <BarItem><BarLink To="summer-camp">Tábor</BarLink></BarItem>
+                <BarItem>
+                    <BarDropdown>
+                        <BarDropdownToggle>Pro členy</BarDropdownToggle>
+                        <BarDropdownMenu>
+                            <BarDropdownItem><BarLink To="about_us/our-work">Naše činnost</BarLink></BarDropdownItem>
+                            <BarDropdownItem><BarLink To="about_us/our-team">Naše parta</BarLink></BarDropdownItem>
+                        </BarDropdownMenu>
+                    </BarDropdown>
+                </BarItem>
+                <BarItem><BarLink To="fotogalery">Fotogalerie</BarLink></BarItem>
+                <BarItem><BarLink To="how-to-support-us">Podpořte nás!</BarLink></BarItem>
+                <BarItem><BarLink To="references">Odkazy</BarLink></BarItem>
+                <BarItem><BarLink To="contacts">Kontakt</BarLink></BarItem>
+            </BarStart>
+        </BarMenu>
+    </Bar>
+
+    <center>
+        <br class="br" />
+        <h1 style="font-size:50px">Krokodýli</h1>
+        <h3>JUNÁK - český skaut, z.s.</h3>
+    </center>
+</Div>
+
+
 @code {
 
 }
