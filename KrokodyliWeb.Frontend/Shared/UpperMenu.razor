@@ -1,28 +1,69 @@
-﻿
+﻿@**@
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent text-white">
+  <a class="navbar-brand text-white" href="#">Krokodýli</a>
+  <button class="navbar-toggler  btn-close-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon "></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        
+        @Button("Domů", "index")
+        @Button("O nás", "about-us")
+        @Button("Akce","events")
+        @Button("Tábor","summer-camp")
+        @Dropdown("Pro členy", 
+            ("Naše činnost", "about-us/our-work"),
+            ("Naše parta", "about-us/our-team")
+        )
+        @Button("Fotogalerie", "fotogalery")
+        @Button("Podpořte nás!", "how-to-support-us")
+        @Button("Odkazy", "references")
+        @Button("Kontakt", "contacts")
+    </ul>
+  </div>
+</nav>
+@**@
+
+@*
+
 <div style="margin:auto; width:54%;">
     <ul class="nav nav-pills uppermenu" >
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="index">Domů</a></li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="about-us">O nás</a></li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="events">Akce</a></li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="summer-camp">Tábor</a></li>
-        <li class="nav-item">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="uppermenu_btn" href="#"  role="button" aria-haspopup="true" aria-expanded="false">Pro členy</a>
+        @Button("Domů", "index")
+        @Button("O nás", "about-us")
+        @Button("Akce","events")
+        @Button("Tábor","summer-camp")
+        @Dropdown("Pro členy", 
+            ("Naše činnost", "about-us/our-work"),
+            ("Naše parta", "about-us/our-team")
+        )
+        @Button("Fotogalerie", "fotogalery");
+        @Button("Podpořte nás!", "how-to-support-us");
+        @Button("Odkazy", "references");
+        @Button("Kontakt", "contacts");
+    </ul>
+</div>@**@
+
+
+
+@code {
+    private RenderFragment Button(string text, string href) => __builder =>
+    {
+    @*<li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="@href">@text</a></li>*@
+    <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@href">@text</a></li>
+    };
+
+    private RenderFragment Dropdown(string text, params (string Text, string Href)[] options) => __builder =>
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" id="uppermenu_btn"  data-toggle="dropdown" href="#"  role="button" aria-haspopup="true" aria-expanded="false">@text</a>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="about_us/our-work">Naše činnost</a>
-                <a class="dropdown-item" href="about_us/our-team">Naše parta</a>
+            @foreach(var o in options)
+            {
+                <a class="dropdown-item" href="@(o.Href)">@(o.Text)</a>
+            }
             </div>
         </li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="fotogalery">Fotogalerie</a></li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="how-to-support-us">Podpořte nás!</a></li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="references">Odkazy</a></li>
-        <li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="contacts">Kontakt</a></li>
-    </ul>
-    <center>
-        <br class="br" />
-        <h1 style="font-size:50px">Krokodýli</h1>
-        <h3>JUNÁK - český skaut, z.s.</h3>
-    </center>
-</div>
-@code {
+    };
 
 }
