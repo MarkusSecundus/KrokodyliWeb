@@ -5,6 +5,11 @@
       "PersonName": "Martina Barvířová",
       "PhoneNumber": "123",
       "Email": "krokodyli@skaut.cz"
+    },
+    {
+      "PersonName": "Daniel Hrádek",
+      "PhoneNumber": "456 789",
+      "Email": "krokodyli2@skaut.cz"
     }
   ],
   "SummerCamps": []
