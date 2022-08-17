@@ -1,5 +1,5 @@
 ﻿<nav class="navbar navbar-expand-lg navbar-light bg-transparent text-white">
-  <a class="navbar-brand text-white" href="#">Krokodýli</a>
+    <a class="navbar-brand text-white" href="#">Krokodýli</a>
   <button class="navbar-toggler  btn-close-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon "></span>
   </button>
@@ -10,7 +10,7 @@
         @Button("Domů", "index")
         @Dropdown("O nás", 
             ("O nás", "about-us"),
-            default,
+            __________,
             ("Naše činnost", "about-us/our-work"),
             ("Kde nás najdete", "about-us/where-to-find-us")
         )
@@ -18,7 +18,7 @@
         @Button("Tábor","summer-camp")
         @Dropdown("Pro členy", 
             ("Pro členy", "for-members"),
-            default,
+            __________,
             ("Kronika", "/for-members/chronicles"),
             ("Bodování", "/for-members/scores"),
             ("Stezka", "/for-members/stezka"),
@@ -39,6 +39,8 @@
 
 
 @code {
+    private static readonly (string, string) __________ = default;
+
     private RenderFragment Button(string text, string href) => __builder =>
     {
     <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@href">@text</a></li>

@@ -1,0 +1,16 @@
+﻿
+<CascadingValue Value="@data">
+    @ChildContent
+</CascadingValue>
+
+@code {
+    private readonly Data data = new();
+
+    [Parameter]
+    public RenderFragment? ChildContent{ get; set; }
+
+    public class Data
+    {
+        public readonly List<ImageDescriptor> Images = new();
+    }
+}

@@ -1,18 +1,22 @@
 ﻿@inject IModalService modals
 
-<img class="@Class_value" src="@Source" alt="@Alt" @onclick="ShowPreview"/>
+<img class="@Class_value" src="@(DescriptorView.Value.Source)" alt="@(DescriptorView.Value.Alt)" @onclick="ShowPreview"/>
 
 
 
 @code {
-    [Parameter]
-    public string Source { get; set; } = "";
+    [CascadingParameter]
+    public ImagePool.Data? PoolData{ get; set; }
 
     [Parameter]
-    public string Alt { get; set; } = "";
+    public string Source { set => Descr = Descr with { Source = value }; }
+    [Parameter]
+    public string Alt { set => Descr = Descr with { Alt = value }; }
 
     [Parameter]
-    public ImageDescriptor Descr { get; set; } = default!;
+    public ImageDescriptor Descr { get; set; } = new("", "");
+
+    private ListElementView<ImageDescriptor> DescriptorView { get; set; } = default!;
 
     [Parameter]
     public string? Class { get; set; }
@@ -23,20 +27,20 @@
     private string Class_value => Class + "img-fluid";
 
 
-
     protected override void OnParametersSet()
     {
-        if(Descr != null && (!string.IsNullOrWhiteSpace(Source) || !string.IsNullOrEmpty(Alt)))
-                throw new ArgumentException("Must set only Descriptor or (Source, Alt), not both!");
+        if (Descr == null) throw new ArgumentNullException(nameof(Descr));
 
-        if (Descr == null)
-            Descr = new(Source, Alt);
+        if (PoolData != null && Previewable)
+            DescriptorView = PoolData.Images.AddElement(Descr);
+        else
+            DescriptorView = Descr;
     }
 
     private void ShowPreview()
     {
         if (!Previewable) return;
 
-        modals.ShowImagePreview(Descr);
+        modals.ShowImagePreview(DescriptorView.Index, DescriptorView.List);
     }
 }

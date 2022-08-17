@@ -28,17 +28,17 @@
 
 @code {
     [Parameter]
-    public ImageDescriptor[] Images { get; set; } = Array.Empty<ImageDescriptor>();
+    public IReadOnlyList<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
 
 
     [Parameter]
     public int ActiveImageIndex { get; set; }
 
-    private bool IsSimple => Images.Length <= 1;
+    private bool IsSimple => Images.Count <= 1;
 
     protected override void OnParametersSet()
     {
-        if (ActiveImageIndex >= Images.Length || ActiveImageIndex < 0) ActiveImageIndex = 0; 
+        if (ActiveImageIndex >= Images.Count || ActiveImageIndex < 0) ActiveImageIndex = 0; 
     }
 
 
