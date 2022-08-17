@@ -1,18 +1,13 @@
 ﻿@inject IModalService modals
 
-<img class="@Class_value" src="@Source" alt="@Alt" @onclick="ShowPreview"/>
+<img class="@Class_value" src="@(Descr.Value.Source)" alt="@(Descr.Value.Alt)" @onclick="ShowPreview"/>
 
 
 
 @code {
-    [Parameter]
-    public string Source { get; set; } = "";
 
     [Parameter]
-    public string Alt { get; set; } = "";
-
-    [Parameter]
-    public ImageDescriptor Descr { get; set; } = default!;
+    public ListElementView<ImageDescriptor> Descr { get; set; } = default!;
 
     [Parameter]
     public string? Class { get; set; }
@@ -24,19 +19,10 @@
 
 
 
-    protected override void OnParametersSet()
-    {
-        if(Descr != null && (!string.IsNullOrWhiteSpace(Source) || !string.IsNullOrEmpty(Alt)))
-                throw new ArgumentException("Must set only Descriptor or (Source, Alt), not both!");
-
-        if (Descr == null)
-            Descr = new(Source, Alt);
-    }
-
     private void ShowPreview()
     {
         if (!Previewable) return;
 
-        modals.ShowImagePreview(Descr);
+        modals.ShowImagePreview(Descr.Index, Descr.List);
     }
 }

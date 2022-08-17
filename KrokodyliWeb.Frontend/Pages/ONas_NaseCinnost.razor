@@ -4,7 +4,7 @@
     <div class="row">
         <h3>Naše činnost</h3>
     </div>
-    <div class="row">
+    <div class="row justify-content-center">
         <p>
             Základním kamenem našeho programu jsou oddílové schůzky,
             vlčácké schůzky se konají každý čtvrtek od 17:00 do 18:30 hodin v klubovně na Skupici,
@@ -12,22 +12,31 @@
             Náplní schůzek jsou hry a poznávání okolí opět formou her. 
             Schůzky se odehrávají  v klubovně a v jejím blízkém okolí.
         </p>
-        <p><Photogalery Images="@(new ImageDescriptor[]{new("./resources/pages/about-us--our-work/1a.jpg","")})"/></p>
+        <p><ImageGalleryView Images="@FirstRow"/></p>
         <p>
         Naší další činností jsou akce, které pořádáme zpravidla dvě v měsíci.
         Jedná se o vycházky do přírody, jednodenní i vícedenní výpravy.
         Na výpravy vícedenní (zpravidla třídenní) vyrážíme o podzimních a velikonočních prázdninách.
         </p>
-        <p><Photogalery Images="@(new ImageDescriptor[]{new("./resources/pages/about-us--our-work/2a.jpg",""),new("./resources/pages/about-us--our-work/2b.jpg","")})"/></p>
+        <p><ImageGalleryView Images="@SecondRow"/></p>
         <p>Vyvrcholením naší celoroční činnosti je tábor. 
             Na tábor jezdíme většinou v červenci, nicméně někdy nás situace může donutit uspořádat tábor déle, třeba i v srpnu. 
             Tábor si většinou stavíme i bouráme sami, staráme se i o celý jeho chod vlastními silami 
             (vaření, praní, zásobování potravinami...) i když samozřejmě nepohrdneme jakoukoli pomocí rodičů a přátel. 
         </p>
-        <p><Photogalery Images="@(new ImageDescriptor[]{new("./resources/pages/about-us--our-work/3a.jpg",""),new("./resources/pages/about-us--our-work/3b.jpg",""),new("./resources/pages/about-us--our-work/3c.jpg","")})"/></p>
+        <p><ImageGalleryView Images="@ThirdRow"/></p>
     </div>
 </div>
 
 @code {
+    private readonly List<ImageDescriptor> AllImages = new();
 
+    private ListView<ImageDescriptor> FirstRow, SecondRow, ThirdRow;
+
+    protected override void OnParametersSet()
+    {
+        FirstRow = AllImages.AddSegment(new ImageDescriptor("./resources/pages/about-us--our-work/1a.jpg", ""));
+        SecondRow = AllImages.AddSegment(new("./resources/pages/about-us--our-work/2a.jpg",""),new("./resources/pages/about-us--our-work/2b.jpg",""));
+        ThirdRow = AllImages.AddSegment(new("./resources/pages/about-us--our-work/3a.jpg",""),new("./resources/pages/about-us--our-work/3b.jpg",""),new("./resources/pages/about-us--our-work/3c.jpg",""));
+    }
 }

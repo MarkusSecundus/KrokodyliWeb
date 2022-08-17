@@ -14,7 +14,7 @@ namespace KrokodyliWeb.Frontend.Utils
             ContentScrollable = true,
             Class = "blazored-modal bg-transparent"
         };
-        public static IModalReference ShowImagePreview(this IModalService self, int index, ImageDescriptor[] images)
+        public static IModalReference ShowImagePreview(this IModalService self, int index, IReadOnlyList<ImageDescriptor> images)
         {
             ImageCarousel? c;
             var parameters = new ModalParameters();

@@ -7,12 +7,24 @@
     <h3>JUNÁK - český skaut, z.s.</h3>
 </div>
 <div>
-    <p><Image Source="./resources/zvadlo_novacci2020_web.jpg" Alt="Náborový plakát" /></p>
+    <p><Image Descr="FirstImage" /></p>
     <bold>SCHŮZKY PROBÍHAJÍ V <a class="linkhref" href="@KlubovnaLocationHyperlink">KLUBOVNĚ VE VELKÉM ZBOŽÍ</a>.</bold>
     <br />
-    <p><Image Source="./resources/pozvanka.png" Alt="Pozvánka" /></p>
+    <p><Image Descr="SecondImage" /></p>
 </div>
 
 @code{
+    private readonly List<ImageDescriptor> AllImages = new();
+
+    private ListElementView<ImageDescriptor> FirstImage, SecondImage;
+
+    protected override void OnParametersSet()
+    {
+        FirstImage = AllImages.AddElement(new("./resources/zvadlo_novacci2020_web.jpg", "Náborový plakát"));
+        SecondImage = AllImages.AddElement(new("./resources/pozvanka.png", "Pozvánka"));
+
+        RenderFragment r = default!;
+    }
+
     private const string KlubovnaLocationHyperlink = "https://mapy.cz/zakladni?x=15.1027250&y=50.1599139&z=19&base=ophoto&source=coor&id=15.103049039807956%2C50.15979253572533";
 }
