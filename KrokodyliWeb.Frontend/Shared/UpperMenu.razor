@@ -8,12 +8,24 @@
     <ul class="navbar-nav mr-auto">
         
         @Button("Domů", "index")
-        @Button("O nás", "about-us-test")
+        @Dropdown("O nás", 
+            ("O nás", "about-us"),
+            default,
+            ("Naše činnost", "about-us/our-work"),
+            ("Kde nás najdete", "about-us/where-to-find-us")
+        )
         @Button("Akce","events")
         @Button("Tábor","summer-camp")
         @Dropdown("Pro členy", 
-            ("Naše činnost", "about-us/our-work"),
-            ("Naše parta", "about-us/our-team")
+            ("Pro členy", "for-members"),
+            default,
+            ("Kronika", "/for-members/chronicles"),
+            ("Bodování", "/for-members/scores"),
+            ("Stezka", "/for-members/stezka"),
+            ("Pomůcky na schůzky a akce", "/for-members/accessories-list"),
+            ("Kroj", "/for-members/uniforms"),
+            ("Čísla členů", "/for-members/numbering"),
+            ("Burza", "/for-members/second-hand")
         )
         @Button("Fotogalerie", "fotogalery-test")
         @Button("Podpořte nás!", "how-to-support-us")
@@ -39,7 +51,14 @@
             <div class="dropdown-menu">
             @foreach(var o in options)
             {
-                <a class="dropdown-item" href="@(o.Href)">@(o.Text)</a>
+                @if(o == default)
+                {
+                    <div class="dropdown-divider"></div>
+                }
+                else
+                {
+                    <a class="dropdown-item" href="@(o.Href)">@(o.Text)</a>
+                }
             }
             </div>
         </li>
