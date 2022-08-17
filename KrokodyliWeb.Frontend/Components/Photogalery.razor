@@ -1,0 +1,46 @@
+﻿@inject IModalService modals 
+
+
+<div class="container">
+    <div class="row">
+    <div class="col-lg-12 text-center my-2">
+            <h3 class="py-3">Testovací stránka z fotogalerie</h3>
+    </div>
+    </div>
+
+
+    <div class="portfolio-item row">
+        @foreach(var img in Images)
+        {
+            <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
+                <a @onclick="()=>PreviewImage(img)" class="fancylight popup-btn" data-fancybox-group="light"> 
+                    <img class="img-fluid" src="@(img.Source)" alt="@(img.Alt)">
+                </a>
+            </div>
+        }
+    </div>
+</div>
+      
+
+
+@code {
+    [Parameter]
+    public IEnumerable<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
+
+
+    private static readonly ModalOptions ModalOptions = new()
+    {
+        Animation = ModalAnimation.FadeIn(0.75d)
+    };
+
+    private void PreviewImage(ImageDescriptor i)
+    {
+        ImageCarousel? c = null;
+        var parameters = new ModalParameters();
+        parameters.Add(nameof(c.Images), Images);
+        parameters.Add(nameof(c.ActiveImage), i);
+
+        modals.Show<ImageCarousel>("Image preview carousel", parameters, ModalOptions);
+    }
+
+}

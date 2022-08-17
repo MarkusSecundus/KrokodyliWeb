@@ -1,0 +1,57 @@
+﻿@using KrokodyliWeb.Utils
+@inject IJSRuntime js
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vmin; max-height: 75vmin;">
+  <div class="carousel-inner">
+    @foreach(var (img, index) in Images.WithIndices())
+    {var cls = "carousel-item" + (index==ActiveImageIndex ? " active" : "");
+        <div class="@cls">
+          <img src="@(img.Source)" class=" d-block w-100" alt="@(img.Alt)">
+        </div>   
+    }
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+
+</div>
+
+
+@code {
+    [Parameter]
+    public IEnumerable<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
+
+
+    [Parameter]
+    public ImageDescriptor? ActiveImage { get; set; }
+
+    private int ActiveImageIndex = 0;
+
+    protected override void OnParametersSet()
+    {
+        ActiveImageIndex = Images.IndexOfFirst(e => e == ActiveImage);
+        if (ActiveImageIndex < 0) ActiveImageIndex = 0;
+    }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await js.InvokeAsync<object>("eval", @"
+    //$('#carouselExampleIndicators').carousel({interval: 2000});
+
+    //see step 2 to understand these news id's:
+    $('.carousel-control-prev').click ( 
+            () => $('#carouselExampleIndicators').carousel('prev') );
+    $('.carousel-control-next').click ( 
+            () => $('#carouselExampleIndicators').carousel('next') );");
+        }
+    }
+}
