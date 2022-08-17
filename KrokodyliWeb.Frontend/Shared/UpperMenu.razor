@@ -1,55 +1,34 @@
-﻿@**@
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent text-white">
+﻿<nav class="navbar navbar-expand-lg navbar-light bg-transparent text-white">
   <a class="navbar-brand text-white" href="#">Krokodýli</a>
   <button class="navbar-toggler  btn-close-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon "></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         
         @Button("Domů", "index")
-        @Button("O nás", "about-us")
+        @Button("O nás", "about-us-test")
         @Button("Akce","events")
         @Button("Tábor","summer-camp")
         @Dropdown("Pro členy", 
             ("Naše činnost", "about-us/our-work"),
             ("Naše parta", "about-us/our-team")
         )
-        @Button("Fotogalerie", "fotogalery")
+        @Button("Fotogalerie", "fotogalery-test")
         @Button("Podpořte nás!", "how-to-support-us")
         @Button("Odkazy", "references")
         @Button("Kontakt", "contacts")
     </ul>
   </div>
 </nav>
-@**@
 
-@*
-
-<div style="margin:auto; width:54%;">
-    <ul class="nav nav-pills uppermenu" >
-        @Button("Domů", "index")
-        @Button("O nás", "about-us")
-        @Button("Akce","events")
-        @Button("Tábor","summer-camp")
-        @Dropdown("Pro členy", 
-            ("Naše činnost", "about-us/our-work"),
-            ("Naše parta", "about-us/our-team")
-        )
-        @Button("Fotogalerie", "fotogalery");
-        @Button("Podpořte nás!", "how-to-support-us");
-        @Button("Odkazy", "references");
-        @Button("Kontakt", "contacts");
-    </ul>
-</div>@**@
 
 
 
 @code {
     private RenderFragment Button(string text, string href) => __builder =>
     {
-    @*<li class="nav-item"><a class="nav-link" id="uppermenu_btn" href="@href">@text</a></li>*@
     <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@href">@text</a></li>
     };
 

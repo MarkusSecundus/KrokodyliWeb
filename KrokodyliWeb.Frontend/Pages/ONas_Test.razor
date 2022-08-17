@@ -1,0 +1,20 @@
+﻿@page "/about-us-test"
+
+@inject IModalService modals
+
+<h3>O nás</h3>
+
+<button @onclick="showModal" >Zobrazit</button>
+
+@code {
+
+
+    private void showModal(){
+        var options = new ModalOptions
+        {
+            HideCloseButton = true,
+            Animation = ModalAnimation.FadeIn(1d)
+        };
+        modals.Show<ONas_Test>("My first modal", options);
+    }
+}

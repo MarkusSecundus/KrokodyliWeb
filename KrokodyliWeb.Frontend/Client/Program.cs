@@ -1,3 +1,4 @@
+using Blazored.Modal;
 using KrokodyliWeb.Data;
 using KrokodyliWeb.Frontend;
 using KrokodyliWeb.Utils;
@@ -25,6 +26,9 @@ namespace KrokodyliWeb.Frontend
                 var httpClient = sp.GetRequiredService<HttpClient>();
                 return httpClient.GetJsonAsync<WebpageData>(cfg.DataFileURI).Result;*/
             });
+
+
+            builder.Services.AddBlazoredModal();
 
             await builder.Build().RunAsync();
         }
