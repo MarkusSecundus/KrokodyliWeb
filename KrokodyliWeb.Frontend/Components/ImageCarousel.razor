@@ -1,14 +1,13 @@
-﻿<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vmin; max-height: 75vmin;">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
+﻿@using KrokodyliWeb.Utils
+@inject IJSRuntime js
+
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vmin; max-height: 75vmin;">
   <div class="carousel-inner">
-    @foreach(var img in Images)
-    {var cls = "carousel-item" + (img == ActiveImage ? " active" : "");
+    @foreach(var (img, index) in Images.WithIndices())
+    {var cls = "carousel-item" + (index==ActiveImageIndex ? " active" : "");
         <div class="@cls">
-          <img src="@(img.Source)" class="img-fluid d-block w-100" alt="@(img.Alt)">
+          <img src="@(img.Source)" class=" d-block w-100" alt="@(img.Alt)">
         </div>   
     }
   </div>
@@ -20,6 +19,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
+
 </div>
 
 
@@ -27,7 +27,31 @@
     [Parameter]
     public IEnumerable<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
 
+
     [Parameter]
     public ImageDescriptor? ActiveImage { get; set; }
 
+    private int ActiveImageIndex = 0;
+
+    protected override void OnParametersSet()
+    {
+        ActiveImageIndex = Images.IndexOfFirst(e => e == ActiveImage);
+        if (ActiveImageIndex < 0) ActiveImageIndex = 0;
+    }
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await js.InvokeAsync<object>("eval", @"
+    //$('#carouselExampleIndicators').carousel({interval: 2000});
+
+    //see step 2 to understand these news id's:
+    $('.carousel-control-prev').click ( 
+            () => $('#carouselExampleIndicators').carousel('prev') );
+    $('.carousel-control-next').click ( 
+            () => $('#carouselExampleIndicators').carousel('next') );");
+        }
+    }
 }
