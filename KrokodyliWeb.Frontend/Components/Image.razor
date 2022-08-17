@@ -1,0 +1,28 @@
+﻿@inject IModalService modals
+
+<img class="@Class_value" src="@Source" alt="@Alt" @onclick="ShowPreview"/>
+
+
+
+@code {
+    [Parameter]
+    public string Source { get; set; } = "";
+
+    [Parameter]
+    public string Alt { get; set; } = "";
+
+    [Parameter]
+    public string? Class { get; set; }
+
+    [Parameter]
+    public bool Previewable { get; set; } = true;
+
+    private string Class_value => Class + "img-fluid";
+
+    private void ShowPreview()
+    {
+        if (!Previewable) return;
+
+        modals.ShowImagePreview(new ImageDescriptor(Source, Alt));
+    }
+}

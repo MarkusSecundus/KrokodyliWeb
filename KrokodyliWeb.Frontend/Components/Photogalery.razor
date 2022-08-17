@@ -23,25 +23,13 @@
 
 @code {
     [Parameter]
-    public IEnumerable<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
+    public ImageDescriptor[] Images { get; set; } = Array.Empty<ImageDescriptor>();
 
 
-    private static readonly ModalOptions ModalOptions = new()
-    {
-        Animation = ModalAnimation.FadeIn(0.75d),
-        HideHeader = true,
-        ContentScrollable = true,
-        Class="blazored-modal bg-transparent"
-    };
 
     private void PreviewImage(int imageIndex)
     {
-        ImageCarousel? c = null;
-        var parameters = new ModalParameters();
-        parameters.Add(nameof(c.Images), Images);
-        parameters.Add(nameof(c.ActiveImageIndex), imageIndex);
-
-        modals.Show<ImageCarousel>("Image preview carousel", parameters, ModalOptions);
+        modals.ShowImagePreview(imageIndex, Images);
     }
 
 }
