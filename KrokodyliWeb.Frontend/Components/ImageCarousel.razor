@@ -1,0 +1,33 @@
+﻿<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vmin; max-height: 75vmin;">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    @foreach(var img in Images)
+    {var cls = "carousel-item" + (img == ActiveImage ? " active" : "");
+        <div class="@cls">
+          <img src="@(img.Source)" class="img-fluid d-block w-100" alt="@(img.Alt)">
+        </div>   
+    }
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+@code {
+    [Parameter]
+    public IEnumerable<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
+
+    [Parameter]
+    public ImageDescriptor? ActiveImage { get; set; }
+
+}
