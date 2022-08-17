@@ -34,4 +34,8 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\resources\pages\about-us--our-work\" />
+	</ItemGroup>
 </Project>
