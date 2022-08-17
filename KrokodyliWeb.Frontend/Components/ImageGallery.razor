@@ -1,0 +1,43 @@
+﻿@using KrokodyliWeb.Utils
+@inject IModalService modals 
+
+
+<div class="container">
+
+    <div class="portfolio-item row justify-content-center">
+        @foreach(var (img, index) in ImagesView.IterateSliceWithIndices())
+        {
+            <div class="item selfie col-lg-3 col-md-4 col-6 col-sm justify-content-center">
+                <img class="img-fluid" src="@(img.Source)" alt="@(img.Alt)" @onclick="()=>PreviewImage(index)">
+            </div>
+        }
+    </div>
+</div>
+      
+
+
+@code {
+    [CascadingParameter]
+    public ImagePool.Data? PoolData{ get; set; }
+
+
+    [Parameter]
+    public IReadOnlyList<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
+    private ListView<ImageDescriptor> ImagesView { get; set; } = ListView<ImageDescriptor>.Empty;
+
+
+    protected override void OnParametersSet()
+    {
+        if (PoolData != null)
+            ImagesView = PoolData.Images.AddSegment(Images);
+        else
+            ImagesView = Images.AsView();
+    }
+
+
+    private void PreviewImage(int imageIndex)
+    {
+        modals.ShowImagePreview(imageIndex, ImagesView.List);
+    }
+
+}
