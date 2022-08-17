@@ -29,15 +29,7 @@
 
 
     [Parameter]
-    public ImageDescriptor? ActiveImage { get; set; }
-
-    private int ActiveImageIndex = 0;
-
-    protected override void OnParametersSet()
-    {
-        ActiveImageIndex = Images.IndexOfFirst(e => e == ActiveImage);
-        if (ActiveImageIndex < 0) ActiveImageIndex = 0;
-    }
+    public int ActiveImageIndex { get; set; }
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
