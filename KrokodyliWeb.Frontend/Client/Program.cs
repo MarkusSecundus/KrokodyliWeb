@@ -16,21 +16,26 @@ namespace KrokodyliWeb.Frontend
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            HttpClient httpProvider(IServiceProvider? _=null) => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) };
+            builder.Services.AddScoped(httpProvider);
 
-            builder.Services.AddSingleton<WebpageConfig>(sp => new());
-            builder.Services.AddSingleton<WebpageData>(sp =>
-            {
-                return new() { Contacts = new() { new WebpageData.ContactsInfo { Email = "krokodyli@seznam.cz", PersonName = "Martina Barvíøová", PhoneNumber = "123456789" } } };
-                /*var cfg = sp.GetRequiredService<WebpageConfig>();
-                var httpClient = sp.GetRequiredService<HttpClient>();
-                return httpClient.GetJsonAsync<WebpageData>(cfg.DataFileURI).Result;*/
-            });
-
+            var http = httpProvider();
+            var config = await LoadJson<WebpageConfig>(http, "config.json");
+            var data = await LoadJson<WebpageData>(http, config.DataFileURI);
+            
+            builder.Services.AddSingleton<WebpageConfig>(sp => config);
+            builder.Services.AddSingleton<WebpageData>(sp =>data );
+            
 
             builder.Services.AddBlazoredModal();
 
             await builder.Build().RunAsync();
+        }
+
+        private static async Task<T> LoadJson<T>(HttpClient http, string uri)
+        {
+            var jsonString = await http.GetStringAsync(uri);
+            return JsonSerializer.Deserialize<T>(jsonString)!;
         }
     }
 }

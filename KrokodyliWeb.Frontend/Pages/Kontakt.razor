@@ -1,6 +1,20 @@
 ﻿@page "/contacts"
 
+@inject WebpageData data
+
+
 <h3>Kontakty</h3>
+
+<div class="container">
+    @foreach(var c in data.Contacts)
+    {
+        <div class="row border-top">
+            <p>@($"Jméno:   {c.PersonName}")</p>
+            <p>@($"E-mail:  {c.Email}")</p>
+            <p>@($"Telefon: {c.PhoneNumber}")</p>
+        </div>
+    }
+</div>
 
 @code {
 

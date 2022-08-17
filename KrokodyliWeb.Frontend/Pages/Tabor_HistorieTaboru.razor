@@ -13,8 +13,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach(var camp in data.SummerCamps)
+        @foreach(var y in data.Years)
         {
+            var camp = y.SummerCamp;
             <tr>
                 <td>@camp.Year</td>
                 <td>@camp.Location</td>
