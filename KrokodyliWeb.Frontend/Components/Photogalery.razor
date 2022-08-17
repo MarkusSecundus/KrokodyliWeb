@@ -1,4 +1,5 @@
-﻿@inject IModalService modals 
+﻿@using KrokodyliWeb.Utils
+@inject IModalService modals 
 
 
 <div class="container">
@@ -8,14 +9,11 @@
     </div>
     </div>
 
-
     <div class="portfolio-item row">
-        @foreach(var img in Images)
+        @foreach(var (img, index) in Images.WithIndices())
         {
-            <div class="item selfie col-lg-3 col-md-4 col-6 col-sm">
-                <a @onclick="()=>PreviewImage(img)" class="fancylight popup-btn" data-fancybox-group="light"> 
-                    <img class="img-fluid" src="@(img.Source)" alt="@(img.Alt)">
-                </a>
+            <div class="item selfie col-lg-3 col-md-4 col-6 col-sm justify-content-center">
+                <img class="img-fluid" src="@(img.Source)" alt="@(img.Alt)" @onclick="()=>PreviewImage(index)">
             </div>
         }
     </div>
@@ -30,15 +28,18 @@
 
     private static readonly ModalOptions ModalOptions = new()
     {
-        Animation = ModalAnimation.FadeIn(0.75d)
+        Animation = ModalAnimation.FadeIn(0.75d),
+        HideHeader = true,
+        ContentScrollable = true,
+        Class="blazored-modal bg-transparent"
     };
 
-    private void PreviewImage(ImageDescriptor i)
+    private void PreviewImage(int imageIndex)
     {
         ImageCarousel? c = null;
         var parameters = new ModalParameters();
         parameters.Add(nameof(c.Images), Images);
-        parameters.Add(nameof(c.ActiveImage), i);
+        parameters.Add(nameof(c.ActiveImageIndex), imageIndex);
 
         modals.Show<ImageCarousel>("Image preview carousel", parameters, ModalOptions);
     }
