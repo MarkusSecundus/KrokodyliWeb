@@ -12,6 +12,9 @@
     public string Alt { get; set; } = "";
 
     [Parameter]
+    public ImageDescriptor Descr { get; set; } = default!;
+
+    [Parameter]
     public string? Class { get; set; }
 
     [Parameter]
@@ -19,10 +22,21 @@
 
     private string Class_value => Class + "img-fluid";
 
+
+
+    protected override void OnParametersSet()
+    {
+        if(Descr != null && (!string.IsNullOrWhiteSpace(Source) || !string.IsNullOrEmpty(Alt)))
+                throw new ArgumentException("Must set only Descriptor or (Source, Alt), not both!");
+
+        if (Descr == null)
+            Descr = new(Source, Alt);
+    }
+
     private void ShowPreview()
     {
         if (!Previewable) return;
 
-        modals.ShowImagePreview(new ImageDescriptor(Source, Alt));
+        modals.ShowImagePreview(Descr);
     }
 }
