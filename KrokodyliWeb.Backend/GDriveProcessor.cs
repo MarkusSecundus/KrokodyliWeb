@@ -10,50 +10,50 @@ using System.Threading.Tasks;
 
 namespace KrokodyliWeb.Backend
 {
-    internal class GDriveProcessor
+    internal static class GDriveProcessor
     {
-        public void Test()
+        public static void Test(string credentialPath)
         {
-            UserCredential credential;
+            GoogleCredential credential;
             // Load client secrets.
-            using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
-            {
-                /* The file token.json stores the user's access and refresh tokens, and is created
-                 automatically when the authorization flow completes for the first time. */
-                string credPath = "token.json";
-                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.FromStream(stream).Secrets,
-                    new string[] {}, //Add Scopes!!!
-                    "user",
-                    CancellationToken.None,
-                    new FileDataStore(credPath, true)).Result;
-                Console.WriteLine("Credential file saved to: " + credPath);
-            }
+            var creds = File.ReadAllText(credentialPath);
+            credential = GoogleCredential.FromJson(creds).CreateScoped(DriveService.Scope.Drive);
+
+
 
             // Create Drive API service.
             var service = new DriveService(new BaseClientService.Initializer
             {
                 HttpClientInitializer = credential,
-                ApplicationName = "PLACEHOLDER1" //Add Name!!!
+                ApplicationName = "Drive API .NET Quickstart"
             });
 
+
+            Console.WriteLine(service.BasePath);
+            Console.WriteLine(service.BaseUri);
+
+
+                
             // Define parameters of request.
             FilesResource.ListRequest listRequest = service.Files.List();
-            listRequest.PageSize = 10;
+            listRequest.PageSize = 1000;
             listRequest.Fields = "nextPageToken, files(id, name)";
 
-            // List files.
-            IList<Google.Apis.Drive.v3.Data.File> files = listRequest.Execute()
-                .Files;
-            Console.WriteLine("Files:");
-            if (files == null || files.Count == 0)
+            while (true)
             {
-                Console.WriteLine("No files found.");
-                return;
-            }
-            foreach (var file in files)
-            {
-                Console.WriteLine("{0} ({1})", file.Name, file.Id);
+                // List files.
+                var files = listRequest.Execute();
+
+                Console.WriteLine("Files:");
+                Console.WriteLine($"{files.Files.Count} files...");
+                foreach (var file in files.Files)
+                {
+                    Console.WriteLine("{0} ({1})", file.Name, file.Id);
+                }
+
+                if (files.NextPageToken == null) break;
+
+                listRequest.PageToken = files.NextPageToken;
             }
         }
     }

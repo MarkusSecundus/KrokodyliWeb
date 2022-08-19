@@ -26,6 +26,9 @@ namespace KrokodyliWeb.Backend
             public string MailUserName { get; init; } = null!;
             [Option('w', "mailpassword", Required = true, HelpText = "Password for the mail client")]
             public string MailPassword { get; init; } = null!;
+
+            [Option('c', "gcloudCredentialPath", Required = true, HelpText = "Path to credential json for Google Cloud API")]
+            public string GCloudCredentialPath { get; init; } = null!;
         }
 
         public static void Main(string[] args)
@@ -47,12 +50,7 @@ namespace KrokodyliWeb.Backend
 
         public void Run()
         {
-            data.Contacts.Add(new()
-            {
-                Email = "krokodyli@skaut.cz",
-                PhoneNumber = "605485388",
-                PersonName = "Martina Barvířová"
-            });
+            GDriveProcessor.Test(args.GCloudCredentialPath);
 
 
             SaveWebpageData();
