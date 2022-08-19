@@ -80,21 +80,5 @@ namespace KrokodyliWeb.Backend
             JsonSerializer.Serialize(file, data, options: DeserializeOptions);
         }
 
-        private static void ProcessMails(CmdArgs args)
-        {
-            Console.WriteLine($"user: '{args.MailUserName}'\npasswd: '{args.MailPassword}'");
-            using var client = new ImapClient();
-            client.Connect(args.ImapHostName, args.ImapPort, SecureSocketOptions.SslOnConnect);
-            client.Authenticate(args.MailUserName, args.MailPassword);
-            client.Inbox.Open(FolderAccess.ReadWrite);
-
-
-            foreach (var uid in client.Inbox.Search(SearchQuery.NotSeen))
-            {
-                var message = client.Inbox.GetMessage(uid);
-                Console.WriteLine($"{uid}--'{message.Subject}':\n{message.TextBody.Substring(0, 10)}...\n\n");
-                client.Inbox.MarkRead(uid);
-            }
-        }
     }
 }

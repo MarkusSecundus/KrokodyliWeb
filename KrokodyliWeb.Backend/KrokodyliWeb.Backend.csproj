@@ -8,14 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="credentials.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="credentials.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.57.0.2746" />
     <PackageReference Include="MailKit" Version="3.3.0" />
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj"/>
-		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj"/>
+		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj" />
+		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj" />
 	</ItemGroup>
 
 </Project>
