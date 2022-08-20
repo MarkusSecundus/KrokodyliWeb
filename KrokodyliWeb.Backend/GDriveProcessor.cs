@@ -32,12 +32,12 @@ namespace KrokodyliWeb.Backend
             Console.WriteLine(service.BasePath);
             Console.WriteLine(service.BaseUri);
 
-
                 
             // Define parameters of request.
             FilesResource.ListRequest listRequest = service.Files.List();
             listRequest.PageSize = 1000;
             listRequest.Fields = "nextPageToken, files(id, name)";
+            listRequest.Q = "mimeType = 'application/vnd.google-apps.folder' and (visibility = 'anyoneCanFind' or visibility = 'anyoneWithLink')";
 
             while (true)
             {
@@ -51,7 +51,7 @@ namespace KrokodyliWeb.Backend
                     Console.WriteLine("{0} ({1})", file.Name, file.Id);
                 }
 
-                if (files.NextPageToken == null) break;
+                if (true || files.NextPageToken == null) break;
 
                 listRequest.PageToken = files.NextPageToken;
             }
