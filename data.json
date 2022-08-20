@@ -1,5 +1,5 @@
 {
-  "Events": [],
+  "Years": [],
   "Contacts": [
     {
       "PersonName": "Martina Barvířová",
@@ -10,7 +10,11 @@
       "PersonName": "Daniel Hrádek",
       "PhoneNumber": "456 789",
       "Email": "krokodyli2@skaut.cz"
+    },
+    {
+      "PersonName": "Martina Barvířová",
+      "PhoneNumber": "605485388",
+      "Email": "krokodyli@skaut.cz"
     }
-  ],
-  "SummerCamps": []
+  ]
 }
