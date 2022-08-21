@@ -8,14 +8,13 @@
 <div class="container">
     @foreach(var c in data.Contacts)
     {
-        <div class="row border-top">
-            <p>@($"Jméno:   {c.PersonName}")</p>
-            <p>@($"E-mail:  {c.Email}")</p>
-            <p>@($"Telefon: {c.PhoneNumber}")</p>
+        <div class="card">
+            <div class="card-header">@($"Jméno:   {c.PersonName}"</div>
+            <div class="card-body">@($"E-mail:   {c.Email}"</div>
+            <div class="card-body">@($"Telefon:   {c.PhoneNumber}"</div>
         </div>
     }
 </div>
 
 @code {
-
 }
