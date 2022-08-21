@@ -8,6 +8,15 @@ namespace KrokodyliWeb.Data
 {
     public class WebpageConfig
     {
-        public string DataFileURI { get; init; } //= @"https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/data.json";
+        public string DataFileURI { get; init; } = null!;
+
+        public MarkdownPagesInfo MarkdownPagesConfig { get; init; }
+
+        public class MarkdownPagesInfo
+        {
+            public string RootURI { get; init; } = null!;
+
+            public string FileExtension { get; init; } = null!;
+        }
     }
 }

@@ -1,0 +1,32 @@
+﻿@page "/pages/{*pageName}"
+
+@inject WebpageConfig cfg
+@inject HttpClient http
+
+
+@Content
+
+
+
+@code {
+    [Parameter]
+    public string? PageName { get; set; }
+
+    private MarkupString Content { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Content = await GetContent();
+    }
+
+    async Task<MarkupString> GetContent()
+    {
+        var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), PageName + cfg.MarkdownPagesConfig.FileExtension);
+
+        var markdown = await http.GetStringAsync(requestUri);
+
+        var html = MarkdownUtils.MarkdownToHtml(markdown);
+        return new MarkupString(html);
+    }
+
+}
