@@ -1,8 +1,8 @@
 ﻿@page "/pages/{*pageName}"
 
-@inject WebpageConfig cfg
-@inject HttpClient http
-
+@inject TranslationsCache cache
+@inject WebpageConfig cfg;
+@inject HttpClient http;
 
 @Content
 
@@ -16,17 +16,28 @@
 
     protected override async Task OnParametersSetAsync()
     {
-        Content = await GetContent();
+        Content = await cache.GetData(cfg, http, PageName!);
     }
 
-    async Task<MarkupString> GetContent()
+
+
+    public class TranslationsCache
     {
-        var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), PageName + cfg.MarkdownPagesConfig.FileExtension);
+        private readonly Dictionary<string, MarkupString> _data = new();
 
-        var markdown = await http.GetStringAsync(requestUri);
+        public async ValueTask<MarkupString> GetData(WebpageConfig cfg, HttpClient http, string PageName)
+        {
+            if (_data.TryGetValue(PageName, out var immediateRet))
+                return immediateRet;
 
-        var html = MarkdownUtils.MarkdownToHtml(markdown);
-        return new MarkupString(html);
+            var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), PageName + cfg.MarkdownPagesConfig.FileExtension);
+
+            var markdown = await http.GetStringAsync(requestUri);
+
+            var html = MarkdownUtils.MarkdownToHtml(markdown);
+            return _data[PageName] = new MarkupString(html);
+        }
     }
+
 
 }
