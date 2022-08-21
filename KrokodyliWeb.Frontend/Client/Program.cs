@@ -1,6 +1,7 @@
 using Blazored.Modal;
 using KrokodyliWeb.Data;
 using KrokodyliWeb.Frontend;
+using KrokodyliWeb.Frontend.Pages;
 using KrokodyliWeb.Frontend.Utils;
 using KrokodyliWeb.Utils;
 using Microsoft.AspNetCore.Components.Web;
@@ -27,6 +28,8 @@ namespace KrokodyliWeb.Frontend
             
             builder.Services.AddSingleton<WebpageConfig>(sp => config);
             builder.Services.AddSingleton<WebpageData>(sp =>data );
+            builder.Services.AddSingleton<ExtensionStorage>();
+            builder.Services.AddScoped<MarkdownPage.TranslationsCache>();
 
 
             builder.Services.AddBlazoredModal();
