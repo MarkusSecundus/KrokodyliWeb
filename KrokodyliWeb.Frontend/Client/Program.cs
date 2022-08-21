@@ -1,9 +1,11 @@
 using Blazored.Modal;
 using KrokodyliWeb.Data;
 using KrokodyliWeb.Frontend;
+using KrokodyliWeb.Frontend.Utils;
 using KrokodyliWeb.Utils;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Radzen;
 using System.Text.Json;
 
 namespace KrokodyliWeb.Frontend
@@ -25,12 +27,14 @@ namespace KrokodyliWeb.Frontend
             
             builder.Services.AddSingleton<WebpageConfig>(sp => config);
             builder.Services.AddSingleton<WebpageData>(sp =>data );
-            
+
 
             builder.Services.AddBlazoredModal();
+            builder.Services.AddRadzen();
 
             await builder.Build().RunAsync();
         }
+
 
         private static async Task<T> LoadJson<T>(HttpClient http, string uri)
         {
