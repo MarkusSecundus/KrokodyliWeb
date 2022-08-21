@@ -35,7 +35,6 @@ namespace KrokodyliWeb.Frontend
             await builder.Build().RunAsync();
         }
 
-
         private static async Task<T> LoadJson<T>(HttpClient http, string uri)
         {
             var jsonString = await http.GetStringAsync(uri);

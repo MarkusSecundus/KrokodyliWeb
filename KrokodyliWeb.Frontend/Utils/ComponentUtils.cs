@@ -26,5 +26,6 @@ namespace KrokodyliWeb.Frontend.Utils
 
         public static IModalReference ShowImagePreview(this IModalService self, ImageDescriptor image)
             => self.ShowImagePreview(0, new[] { image });
+
     }
 }
