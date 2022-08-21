@@ -1,7 +1,25 @@
 ﻿@page "/for-members/numbering"
 
+@inject WebpageData data
+
 <h3>Pro členy - Čísla členů</h3>
+<p class="linkhref">Každé vlče/Každý skaut má všechny své věci označeny číslem, které mu bylo přiděleno.</p>
+
+        @{GridItemView v;
+        <RadzenDataGrid TItem="GridItemView" Data="data.MembershipNumbers.Select(k=>new GridItemView(k.Key, k.Value))"
+        AllowFiltering="true" FilterMode="FilterMode.SimpleWithMenu" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowSorting="true"
+        Responsive="true" 
+        @attributes="RadzenUtils.DataGridLocalizationParams"
+        >
+            <Columns>
+                <RadzenDataGridColumn TItem="GridItemView" Property="@nameof(v.Number)" Title="Číslo" Width="5px" Resizable="true"/>
+                <RadzenDataGridColumn TItem="GridItemView" Property="@nameof(v.Name)" Title="Jméno" Width="100px" Resizable="true"/>
+            </Columns>
+        </RadzenDataGrid>
+        }
 
 @code {
 
+
+    record struct GridItemView(int Number, string Name){}
 }

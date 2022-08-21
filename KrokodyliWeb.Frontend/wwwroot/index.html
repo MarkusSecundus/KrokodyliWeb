@@ -8,9 +8,11 @@
     <base href="/" />
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
-    <link href="KrokodyliWeb.Frontend.styles.css" rel="stylesheet" />
+    <!--<link href="KrokodyliWeb.Frontend.styles.css" rel="stylesheet" />-->
 
     <link href="_content/Blazored.Modal/blazored-modal.css" rel="stylesheet" />
+    <link rel="stylesheet" href="_content/Radzen.Blazor/css/default-base.css">
+
 </head>
 
 
@@ -30,15 +32,7 @@
 
     <script src="_content/Blazored.Modal/blazored.modal.js"></script>
 
-    <script>
-        window.initializeCarousel = () => {
-            $('#carouselExampleIndicators').carousel({ interval: 2000 })
-            $('#carouselExampleIndicators-prev').click(
-                () => $('#carouselExampleIndicators').carousel('prev'));
-            $('#carouselExampleIndicators-next').click(
-                () => $('#carouselExampleIndicators').carousel('next'));
-        }
-    </script>
+    <script src="_content/Radzen.Blazor/Radzen.Blazor.js"></script>
 </body>
 
 </html>
