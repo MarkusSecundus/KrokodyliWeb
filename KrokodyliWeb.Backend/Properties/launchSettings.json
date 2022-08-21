@@ -2,7 +2,7 @@
   "profiles": {
     "KrokodyliWeb.Backend": {
       "commandName": "Project",
-      "commandLineArgs": "--data \".\\\\events_list.json\" --mailusername ds --mailpassword d"
+      "commandLineArgs": "--data \".\\\\events_list.json\" --mailusername ds --mailpassword d -c \"..\\\\..\\\\..\\\\credentials.json\""
     }
   }
 }

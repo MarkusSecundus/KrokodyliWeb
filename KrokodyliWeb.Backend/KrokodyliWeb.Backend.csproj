@@ -11,11 +11,18 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Google.Apis.Drive.v3" Version="1.57.0.2746" />
     <PackageReference Include="MailKit" Version="3.3.0" />
+    <PackageReference Include="MarkusSecundus.Util" Version="1.0.7" />
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj"/>
-		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj"/>
+		<ProjectReference Include="../KrokodyliWeb.Utils/KrokodyliWeb.Utils.csproj" />
+		<ProjectReference Include="../KrokodyliWeb.Data/KrokodyliWeb.Data.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="credentials.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

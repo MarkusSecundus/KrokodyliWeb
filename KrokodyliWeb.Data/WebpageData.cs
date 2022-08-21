@@ -13,6 +13,7 @@ namespace KrokodyliWeb.Data
         public List<ContactsInfo> Contacts { get; set; } = new();
 
 
+        public Dictionary<int, string> MembershipNumbers { get; set; } = new();
 
 
         public class ScoutYearInfo

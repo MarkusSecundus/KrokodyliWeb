@@ -26,13 +26,16 @@ namespace KrokodyliWeb.Backend
             public string MailUserName { get; init; } = null!;
             [Option('w', "mailpassword", Required = true, HelpText = "Password for the mail client")]
             public string MailPassword { get; init; } = null!;
+
+            [Option('c', "gcloudCredentialPath", Required = true, HelpText = "Path to credential json for Google Cloud API")]
+            public string GCloudCredentialPath { get; init; } = null!;
         }
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var parsed = Parser.Default.ParseArguments<CmdArgs>(args);
             if (parsed.Value == null) return;
-            new BackendEntryPoint(parsed.Value).Run();
+            await new BackendEntryPoint(parsed.Value).Run();
         }
 
 
@@ -45,14 +48,9 @@ namespace KrokodyliWeb.Backend
         }
 
 
-        public void Run()
+        public async Task Run()
         {
-            data.Contacts.Add(new()
-            {
-                Email = "krokodyli@skaut.cz",
-                PhoneNumber = "605485388",
-                PersonName = "Martina Barvířová"
-            });
+            //await GDriveProcessor.Test(args.GCloudCredentialPath);
 
 
             SaveWebpageData();
@@ -80,21 +78,5 @@ namespace KrokodyliWeb.Backend
             JsonSerializer.Serialize(file, data, options: DeserializeOptions);
         }
 
-        private static void ProcessMails(CmdArgs args)
-        {
-            Console.WriteLine($"user: '{args.MailUserName}'\npasswd: '{args.MailPassword}'");
-            using var client = new ImapClient();
-            client.Connect(args.ImapHostName, args.ImapPort, SecureSocketOptions.SslOnConnect);
-            client.Authenticate(args.MailUserName, args.MailPassword);
-            client.Inbox.Open(FolderAccess.ReadWrite);
-
-
-            foreach (var uid in client.Inbox.Search(SearchQuery.NotSeen))
-            {
-                var message = client.Inbox.GetMessage(uid);
-                Console.WriteLine($"{uid}--'{message.Subject}':\n{message.TextBody.Substring(0, 10)}...\n\n");
-                client.Inbox.MarkRead(uid);
-            }
-        }
     }
 }
