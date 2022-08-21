@@ -3,17 +3,19 @@ using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using KrokodyliWeb.Utils;
+using MarkusSecundus.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GDriveFile = Google.Apis.Drive.v3.Data.File;
 
 namespace KrokodyliWeb.Backend
 {
     internal static class GDriveProcessor
     {
-        public static void Test(string credentialPath)
+        public static async Task Test(string credentialPath)
         {
             GoogleCredential credential;
             // Load client secrets.
@@ -35,29 +37,92 @@ namespace KrokodyliWeb.Backend
 
             var rootID = @"1xO4oHGXFeVXjJ3YjbH9IkEQaWaNguwld";  //3 jezy 2021
 
-            // Define parameters of request.
-            FilesResource.ListRequest listRequest = service.Files.List();
-            listRequest.PageSize = 1000;
-            listRequest.Fields = "nextPageToken, files(id, name)";
-            //listRequest.Q = "mimeType = 'application/vnd.google-apps.folder' and (visibility = 'anyoneCanFind' or visibility = 'anyoneWithLink')" /*+" and name = 'Výběr'"*/;
-            listRequest.Q = @$"parents in '{rootID}'";
+            var root = await ConstructDirectoryTree(service.Files, rootID);
 
-            while (true)
+            if (root == null) Console.WriteLine("null");
+            else print(root);
+
+            void print(DriveDirectory root, string indent="")
             {
-                // List files.
-                var files = listRequest.Execute();
+                Console.WriteLine($"{indent}{root.Descriptor.Name}...");
+                foreach (var f in root.Files)
+                    Console.WriteLine($"\t{indent}-{f.Name}");
+                foreach (var d in root.Subdirectories)
+                    print(d, indent + "\t");
+            }
 
-                Console.WriteLine("Files:");
-                Console.WriteLine($"{files.Files.Count} files...");
-                foreach (var file in files.Files)
+
+        }
+
+
+        const int MaxPageSize = 1000;
+        const string FieldsRequest = "nextPageToken, files(id, name, parents, mimeType)";
+
+        private static async Task<DriveDirectory?> ConstructDirectoryTree(FilesResource service, string rootId)
+        {
+            var req = service.List();
+            req.PageSize = MaxPageSize;
+            req.Fields = FieldsRequest;
+            req.Q = "mimeType = 'application/vnd.google-apps.folder' and (visibility = 'anyoneCanFind' or visibility = 'anyoneWithLink')";
+
+            var dirs = new DefaultValDict<string, DriveDirectory>(k => new());
+
+            for(; ; )
+            {
+                var files = await req.ExecuteAsync();
+
+                foreach(var f in files.Files)
                 {
-                    Console.WriteLine($"{file.Name} ({file.Id})[] {file.Kind}-{file.MimeType} -- {file.Description}");
+                    var curr = dirs[f.Id];
+                    curr.Descriptor = f;
+                    foreach (var parent in f.Parents)
+                        dirs[parent].Subdirectories.Add(curr);
                 }
 
-                if (true || files.NextPageToken == null) break;
-
-                listRequest.PageToken = files.NextPageToken;
+                if ((req.PageToken = files.NextPageToken) == null) break;
             }
+            if (!dirs.ContainsKey(rootId))
+                return null;
+
+            void ListAllSubdirs(DriveDirectory root, HashSet<string> subdirs)
+            {
+                if (root.Descriptor == null || subdirs.Contains(root.Descriptor.Id)) return;
+                subdirs.Add(root.Descriptor.Id);
+                foreach (var s in root.Subdirectories)
+                    ListAllSubdirs(s, subdirs);
+            }
+            var allSubdirIDs = new HashSet<string>();
+            ListAllSubdirs(dirs[rootId], allSubdirIDs);
+
+            req = service.List();
+            req.PageSize = MaxPageSize;
+            req.Fields = FieldsRequest;
+            req.Q = $"(mimeType != 'application/vnd.google-apps.folder') and (parents in '{allSubdirIDs.MakeString("' or parents in '")}')";
+            
+            for(; ; )
+            {
+                var files = await req.ExecuteAsync();
+
+                foreach(var f in files.Files)
+                {
+                    foreach (var parent in f.Parents)
+                        dirs[parent].Files.Add(f);
+                }
+
+                if ((req.PageToken = files.NextPageToken) == null) break;
+            }
+
+            return dirs[rootId];
         }
+
+        class DriveDirectory
+        {
+            public GDriveFile Descriptor { get; set; } = null!;
+
+            public List<GDriveFile> Files { get; } = new();
+
+            public List<DriveDirectory> Subdirectories { get; } = new();
+        }
+
     }
 }

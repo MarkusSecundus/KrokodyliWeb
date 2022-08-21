@@ -31,11 +31,11 @@ namespace KrokodyliWeb.Backend
             public string GCloudCredentialPath { get; init; } = null!;
         }
 
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var parsed = Parser.Default.ParseArguments<CmdArgs>(args);
             if (parsed.Value == null) return;
-            new BackendEntryPoint(parsed.Value).Run();
+            await new BackendEntryPoint(parsed.Value).Run();
         }
 
 
@@ -48,9 +48,9 @@ namespace KrokodyliWeb.Backend
         }
 
 
-        public void Run()
+        public async Task Run()
         {
-            GDriveProcessor.Test(args.GCloudCredentialPath);
+            await GDriveProcessor.Test(args.GCloudCredentialPath);
 
 
             SaveWebpageData();
