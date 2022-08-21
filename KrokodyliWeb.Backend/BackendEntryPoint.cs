@@ -50,7 +50,7 @@ namespace KrokodyliWeb.Backend
 
         public async Task Run()
         {
-            await GDriveProcessor.Test(args.GCloudCredentialPath);
+            //await GDriveProcessor.Test(args.GCloudCredentialPath);
 
 
             SaveWebpageData();
