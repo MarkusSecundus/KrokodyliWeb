@@ -55,5 +55,19 @@ namespace KrokodyliWeb.Utils
 
         public static ListView<T> AsView<T>(this IReadOnlyList<T> self)
             => new ListView<T>(self);
+
+
+
+
+        public static string MakeString<T>(this IEnumerable<T> self, string separator=", ")
+        {
+            using var it = self.GetEnumerator();
+            if (!it.MoveNext()) return "";
+            var bld = new StringBuilder().Append(it.Current);
+
+            while (it.MoveNext()) bld.Append(separator).Append(it.Current);
+
+            return bld.ToString();
+        }
     }
 }
