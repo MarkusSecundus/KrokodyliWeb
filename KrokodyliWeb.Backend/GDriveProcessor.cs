@@ -2,6 +2,7 @@
 using Google.Apis.Drive.v3;
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
+using KrokodyliWeb.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,14 @@ namespace KrokodyliWeb.Backend
             Console.WriteLine(service.BasePath);
             Console.WriteLine(service.BaseUri);
 
-                
+            var rootID = @"1xO4oHGXFeVXjJ3YjbH9IkEQaWaNguwld";  //3 jezy 2021
+
             // Define parameters of request.
             FilesResource.ListRequest listRequest = service.Files.List();
             listRequest.PageSize = 1000;
             listRequest.Fields = "nextPageToken, files(id, name)";
-            listRequest.Q = "mimeType = 'application/vnd.google-apps.folder' and (visibility = 'anyoneCanFind' or visibility = 'anyoneWithLink')";
+            //listRequest.Q = "mimeType = 'application/vnd.google-apps.folder' and (visibility = 'anyoneCanFind' or visibility = 'anyoneWithLink')" /*+" and name = 'Výběr'"*/;
+            listRequest.Q = @$"parents in '{rootID}'";
 
             while (true)
             {
@@ -48,7 +51,7 @@ namespace KrokodyliWeb.Backend
                 Console.WriteLine($"{files.Files.Count} files...");
                 foreach (var file in files.Files)
                 {
-                    Console.WriteLine("{0} ({1})", file.Name, file.Id);
+                    Console.WriteLine($"{file.Name} ({file.Id})[] {file.Kind}-{file.MimeType} -- {file.Description}");
                 }
 
                 if (true || files.NextPageToken == null) break;
