@@ -3,13 +3,8 @@
   "Contacts": [
     {
       "PersonName": "Martina Barvířová",
-      "PhoneNumber": "123",
+      "PhoneNumber": "605485388",
       "Email": "krokodyli@skaut.cz"
-    },
-    {
-      "PersonName": "Daniel Hrádek",
-      "PhoneNumber": "456 789",
-      "Email": "krokodyli2@skaut.cz"
     },
     {
       "PersonName": "Martina Barvířová",
@@ -41,5 +36,37 @@
       "PhoneNumber": "605485388",
       "Email": "krokodyli@skaut.cz"
     }
-  ]
+  ],
+  "MembershipNumbers": {
+    "1": "Jakub Síbrt",
+    "2": "David Cepek",
+    "3": "Martin Chocholouš",
+    "4": "Leoš Petzold",
+    "5": "Jakub Kočvara",
+    "6": "Tobiáš Tlaskal",
+    "7": "Kryštof Chorouš",
+    "8": "Martin Urban",
+    "9": "Ondřej Kokeš",
+    "10": "Matěj Síbrt",
+    "11": "David Mendík",
+    "12": "Jakub Čajka",
+    "13": "Adam Karbulka",
+    "14": "Daniel Rott",
+    "15": "Samuel Pulda",
+    "16": "Jakub Jaša",
+    "17": "Ondřej Chorouš",
+    "18": "Vojtěch Krejčík",
+    "19": "Pavel Soukup",
+    "20": "Vojtěch Přidal",
+    "21": "Vít Hladký",
+    "22": "Daniel Cepek",
+    "23": "Dan Marák",
+    "24": "Oliver Marák - Olík",
+    "25": "Jan Kocmánek",
+    "26": "Daniel Urbánek",
+    "27": "Matouš Chorouš",
+    "28": "Filip Henri Agba",
+    "29": "Adam Poděbradský",
+    "30": "Daniel Van Staejen"
+  }
 }
