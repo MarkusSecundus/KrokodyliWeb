@@ -10,13 +10,13 @@ namespace KrokodyliWeb.Data
     {
         public string DataFileURI { get; init; } = null!;
 
-        public MarkdownPagesInfo MarkdownPagesConfig { get; init; }
+        public MarkdownPagesInfo MarkdownPagesConfig { get; init; } = new();
 
         public class MarkdownPagesInfo
         {
-            public string RootURI { get; init; } = null!;
+            public string RootURI { get; init; } = @"https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/pages/";
 
-            public string FileExtension { get; init; } = null!;
+            public string FileExtension { get; init; } = ".md";
         }
     }
 }
