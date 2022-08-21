@@ -59,8 +59,9 @@ namespace KrokodyliWeb.Utils
 
 
 
-        public static string MakeString<T>(this IEnumerable<T> self, string separator=", ")
+        /*public static string MakeString<T>(this IEnumerable<T> self, string separator=", ")
         {
+            if (self == null) return "";
             using var it = self.GetEnumerator();
             if (!it.MoveNext()) return "";
             var bld = new StringBuilder().Append(it.Current);
@@ -68,6 +69,6 @@ namespace KrokodyliWeb.Utils
             while (it.MoveNext()) bld.Append(separator).Append(it.Current);
 
             return bld.ToString();
-        }
+        }*/
     }
 }
