@@ -40,7 +40,7 @@ namespace KrokodyliWeb.Frontend
 
         private static async Task<T> LoadJson<T>(HttpClient http, string uri)
         {
-            var jsonString = await http.GetStringAsync(uri);
+            var jsonString = await http.GetStringNoCacheAsync(uri);
             Console.WriteLine($"JSON({uri}):\n{jsonString}--------------------------------------------------------\n\n");
             return JsonSerializer.Deserialize<T>(jsonString)!;
         }
