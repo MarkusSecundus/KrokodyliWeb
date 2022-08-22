@@ -6,7 +6,7 @@
     {"Name": "Naše činnost", "URL": "pages/about-us/our-work"},
     {"Name": "Kde nás najdete", "URL": "pages/about-us/where-to-find-us"},
   ]},
-  {"Name": "Tábor", "URL": "pages/for-members"},
+  {"Name": "Tábor", "URL": "pages/summer-camp"},
   {"Name": "Pro členy", "Subpages":[
     {"Name": "Pro členy", "URL": "pages/for-members"},
     "DELIMITER",
