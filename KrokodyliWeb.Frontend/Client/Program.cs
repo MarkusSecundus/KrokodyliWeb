@@ -29,7 +29,7 @@ namespace KrokodyliWeb.Frontend
             builder.Services.AddSingleton<WebpageConfig>(sp => config);
             builder.Services.AddSingleton<WebpageData>(sp =>data );
             builder.Services.AddSingleton<ExtensionStorage>();
-            builder.Services.AddScoped<MarkdownPage.TranslationsCache>();
+            builder.Services.AddScoped<MarkdownPage_Impl.TranslationsCache>();
 
 
             builder.Services.AddBlazoredModal();
