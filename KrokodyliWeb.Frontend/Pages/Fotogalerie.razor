@@ -14,14 +14,21 @@
 <div class="container">
 
     <div class="portfolio-item row justify-content-center">
-        @foreach(var entry in Entries)
+        @foreach(var year in Entries)
         {
-            string address = $"/fotogalery/{entry.Address}";
-            <div class="card col-lg-3 col-md-4 col-6 col-sm-12 bg-transparent border-white" style="margin: 20px;"  @onclick="()=>ToSubpage(entry)">
-                <div class="card-body border-bottom">
-                    <h5 class="card-title">@entry.Name</h5>
+            <div class="container border-top">
+                <div class="row  justify-content-center">
+                @foreach(var entry in year.Entries)
+                {
+                    string address = $"/fotogalery/{entry.Address}";
+                    <div class="card col-lg-3 col-md-4 col-6 col-sm-12 bg-transparent border-white" style="margin: 20px;"  @onclick="()=>ToSubpage(entry)">
+                        <div class="card-body border-bottom">
+                            <h5 class="card-title">@entry.Name</h5>
+                        </div>
+                        <img class="card-img-bottom" src="@(entry.PreviewImg.Source)" alt="@(entry.PreviewImg.Alt)"/>
+                    </div>
+                }
                 </div>
-                <img class="card-img-bottom" src="@(entry.PreviewImg.Source)" alt="@(entry.PreviewImg.Alt)"/>
             </div>
         }
     </div>
@@ -35,19 +42,32 @@
             SampleImg4 = new("./resources/pozvanka.png", "pozvánka"), 
             SampleImg3 = new("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo");
 
-    private Entry[] Entries = new Entry[]
+    private Year[] Entries = new Year[]
     {
-        new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
-        new("Tábor 2022", SampleImg2, "tabor-2022"),
-        new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
-        new("Tábor 2021", SampleImg2, "tabor-2022"),
-        new("Podzimní Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
-        new("Tábor 2020", SampleImg2, "tabor-2022"),
-        new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
-        new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
-        new("Tábor 2019", SampleImg2, "tabor-2022"),
-        new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+        new (new Entry[]{
+            new("Tábor 2022", SampleImg2, "tabor-2022"),
+            new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+            new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
+            new("Podzimní Robinzonáda", SampleImg2, "podzimni-robinzonada"),
+            new("Nymburská plácačka", SampleImg3, "placacka"),
+            new("Oheň sv. Jiří", SampleImg2, "sv-jiri"),
+            new("Brigáda VZ", SampleImg1, "sv-jiri"),
+            }
+        ),
+        new (new Entry[]{
+            new("Tábor 2021", SampleImg2, "tabor-2021"),
+            new("Podzimní Robinzonáda", SampleImg3, "velikonocni-robinzonada")
+        }),
+        new (new Entry[]{
+            new("Tábor 2020", SampleImg2, "tabor-2020"),
+            new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+            new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada")
+        }),
+        
+        
     };
+
+    private record class Year(Entry[] Entries){}
 
     private record class Entry(
         string Name,
