@@ -1,0 +1,25 @@
+[
+  {"Name": "Domů", "URL": "index"},
+  {"Name": "O Nás", "Subpages":[
+    {"Name": "O nás", "URL": "pages/about-us"},
+    "DELIMITER",
+    {"Name": "Naše činnost", "URL": "pages/about-us/our-work"},
+    {"Name": "Kde nás najdete", "URL": "pages/about-us/where-to-find-us"},
+  ]},
+  {"Name": "Tábor", "URL": "pages/for-members},
+  {"Name": "Pro členy", "Subpages":[
+    {"Name": "Pro členy", "URL": "pages/for-members"},
+    "DELIMITER",
+    {"Name": "Kronika", "URL": "pages/for-members/chronicles"},
+    {"Name": "Bodování", "URL": "pages/for-members/scores"},
+    {"Name": "Stezka", "URL": "pages/for-members/stezka"},
+    {"Name": "Pomůcky na schůzky a akce", "URL": "pages/for-members/accessories-list"},
+    {"Name": "Kroj", "URL": "pages/for-members/uniforms"},
+    {"Name": "Čísla členů", "URL": "for-members/numbering"},
+    {"Name": "Burza", "URL": "for-members/second-hand"}
+  ]},
+  {"Name": "Fotogalerie", "URL": "fotogalery-test"},
+  {"Name": "Podpořte nás!", "URL": "how-to-support-us"},
+  {"Name": "Odkazy", "URL": "references"},
+  {"Name": "Kontakt", "URL": "contacts"},
+]
