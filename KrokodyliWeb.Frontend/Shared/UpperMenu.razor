@@ -9,21 +9,21 @@
         
         @Button("Domů", "index")
         @Dropdown("O nás", 
-            ("O nás", "about-us"),
+            ("O nás", "pages/about-us"),
             __________,
-            ("Naše činnost", "about-us/our-work"),
-            ("Kde nás najdete", "about-us/where-to-find-us")
+            ("Naše činnost", "pages/about-us/our-work"),
+            ("Kde nás najdete", "pages/about-us/where-to-find-us")
         )
         @Button("Akce","events")
-        @Button("Tábor","summer-camp")
+        @Button("Tábor","pages/summer-camp")
         @Dropdown("Pro členy", 
             ("Pro členy", "for-members"),
             __________,
             ("Kronika", "for-members/chronicles"),
             ("Bodování", "for-members/scores"),
-            ("Stezka", "for-members/stezka"),
-            ("Pomůcky na schůzky a akce", "for-members/accessories-list"),
-            ("Kroj", "for-members/uniforms"),
+            ("Stezka", "pages/for-members/stezka"),
+            ("Pomůcky na schůzky a akce", "pages/for-members/accessories-list"),
+            ("Kroj", "pages/for-members/uniforms"),
             ("Čísla členů", "for-members/numbering"),
             ("Burza", "for-members/second-hand")
         )
@@ -31,11 +31,6 @@
         @Button("Podpořte nás!", "how-to-support-us")
         @Button("Odkazy", "references")
         @Button("Kontakt", "contacts")
-        @Dropdown("Pages",
-            ("Page1", "pages/page1"),
-            ("Something", "pages/something"),
-            ("Something-SD", "pages/something/sd")
-        )
     </ul>
   </div>
 </nav>

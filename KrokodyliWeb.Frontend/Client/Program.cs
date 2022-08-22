@@ -29,7 +29,7 @@ namespace KrokodyliWeb.Frontend
             builder.Services.AddSingleton<WebpageConfig>(sp => config);
             builder.Services.AddSingleton<WebpageData>(sp =>data );
             builder.Services.AddSingleton<ExtensionStorage>();
-            builder.Services.AddScoped<MarkdownPage.TranslationsCache>();
+            builder.Services.AddScoped<MarkdownPage_Impl.TranslationsCache>();
 
 
             builder.Services.AddBlazoredModal();
@@ -40,7 +40,7 @@ namespace KrokodyliWeb.Frontend
 
         private static async Task<T> LoadJson<T>(HttpClient http, string uri)
         {
-            var jsonString = await http.GetStringAsync(uri);
+            var jsonString = await http.GetStringNoCacheAsync(uri);
             Console.WriteLine($"JSON({uri}):\n{jsonString}--------------------------------------------------------\n\n");
             return JsonSerializer.Deserialize<T>(jsonString)!;
         }

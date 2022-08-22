@@ -13,7 +13,7 @@ namespace KrokodyliWeb.Utils
         {
             public static readonly MarkdownPipeline Value = new MarkdownPipelineBuilder().UseAdvancedExtensions().UseBootstrap().Build();
         }
-        public static string MarkdownToHtml(string markdown, bool useBootstrap=false)
+        public static string MarkdownToHtml(string markdown)
         {
             return Markdown.ToHtml(markdown, MarkdownPipeline_LazyInit.Value);
         }
