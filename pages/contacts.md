@@ -1,14 +1,8 @@
 # Kontakty
 ---------------------
 
-#### Martina Barvířová  *- Hlavní vedoucí*
-605 485 388  
-<krokodyli@skaut.cz>
-    
-#### Daniel Hrádek (Ždan)
-xxx xxx xxx  
-<krokodyli@skaut.cz>
+#### Junák - český skaut, středisko Krále Jiřího Poděbrady, z.s.  
 
-#### Pavel Stryja (Tyčka)
-xxx xxx xxx  
-<krokodyli@skaut.cz>
+3. oddíl Krokodýli  
+email: krokodyli@skaut.cz  
+tel: 723 800 055  
