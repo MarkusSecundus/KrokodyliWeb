@@ -7,7 +7,7 @@
     <div class="portfolio-item row justify-content-center">
         @foreach(var (img, index) in ImagesView.IterateSliceWithIndices())
         {
-            <div class="item selfie col-lg-3 col-md-4 col-6 col-sm justify-content-center">
+            <div class="item selfie col-lg-3 col-md-4 col-6 col-sm-12 justify-content-center">
                 <img class="img-fluid" src="@(img.Source)" alt="@(img.Alt)" @onclick="()=>PreviewImage(index)">
             </div>
         }
