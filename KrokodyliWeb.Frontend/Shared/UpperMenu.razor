@@ -1,5 +1,9 @@
-﻿<nav class="navbar navbar-expand-lg navbar-light bg-transparent text-white">
-    <a class="navbar-brand text-white" href="#">Krokodýli</a>
+﻿@inject NavbarTreeConfig tree
+@inject WebpageData data
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent text-white">
+    <a class="navbar-brand text-white" href="#">@(data.OrganisationName)</a>
   <button class="navbar-toggler  btn-close-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon "></span>
   </button>
@@ -7,30 +11,16 @@
   <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
         
-        @Button("Domů", "index")
-        @Dropdown("O nás", 
-            ("O nás", "pages/about-us"),
-            __________,
-            ("Naše parta", "pages/about-us/our-team"),
-            ("Naše činnost", "pages/about-us/our-work"),
-            ("Kde nás najdete", "pages/about-us/where-to-find-us")
-        )
-        @Button("Akce","events")
-        @Button("Tábor","pages/summer-camp")
-        @Dropdown("Pro členy", 
-            ("Pro členy", "pages/for-members"),
-            __________,
-            ("Kronika", "pages/for-members/chronicles"),
-            ("Bodování", "pages/for-members/scores"),
-            ("Stezka", "pages/for-members/stezka"),
-            ("Pomůcky na schůzky a akce", "pages/for-members/accessories-list"),
-            ("Kroj", "pages/for-members/uniforms"),
-            ("Čísla členů", "for-members/numbering")
-        )
-        @Button("Fotogalerie", "fotogalery")
-        @Button("Podpořte nás!", "pages/how-to-support-us")
-        @Button("Odkazy", "pages/references")
-        @Button("Kontakt", "pages/contacts")
+        @foreach(var node in tree.Pages)
+        {
+                @(node switch
+                    {
+                        NavbarTreeConfig.SimpleNode s => Button(s),
+                        NavbarTreeConfig.DropdownNode d => Dropdown(d),
+                        _ => throw new FormatException("Invalid page layout!")
+                    }
+                )
+            }
     </ul>
   </div>
 </nav>
@@ -39,27 +29,26 @@
 
 
 @code {
-    private static readonly (string, string) __________ = default;
 
-    private RenderFragment Button(string text, string href) => __builder =>
+    private RenderFragment Button(NavbarTreeConfig.SimpleNode n) => __builder =>
     {
-    <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@href">@text</a></li>
+    <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@(n.Href)">@(n.Name)</a></li>
     };
 
-    private RenderFragment Dropdown(string text, params (string Text, string Href)[] options) => __builder =>
+    private RenderFragment Dropdown(NavbarTreeConfig.DropdownNode n) => __builder =>
     {
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white" id="uppermenu_btn"  data-toggle="dropdown" href="#"  role="button" aria-haspopup="true" aria-expanded="false">@text</a>
+            <a class="nav-link dropdown-toggle text-white" id="uppermenu_btn"  data-toggle="dropdown" href="#"  role="button" aria-haspopup="true" aria-expanded="false">@(n.Name)</a>
             <div class="dropdown-menu">
-            @foreach(var o in options)
+            @foreach(var o in n.Subpages)
             {
-                @if(o == default)
+                @if(o is NavbarTreeConfig.Delimiter)
                 {
                     <div class="dropdown-divider"></div>
                 }
-                else
+                else if(o is NavbarTreeConfig.SimpleNode simple)
                 {
-                    <a class="dropdown-item" href="@(o.Href)">@(o.Text)</a>
+                    <a class="dropdown-item" href="@(simple.Href)">@(simple.Name)</a>
                 }
             }
             </div>

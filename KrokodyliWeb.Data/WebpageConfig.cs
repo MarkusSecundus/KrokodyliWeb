@@ -10,6 +10,8 @@ namespace KrokodyliWeb.Data
     {
         public string DataFileURI { get; init; } = null!;
 
+        public string NavbarTreeConfigURI { get; init; } = null!;
+
         public MarkdownPagesInfo MarkdownPagesConfig { get; init; } = new();
 
         public class MarkdownPagesInfo
