@@ -1,4 +1,7 @@
-### Jsme 3.oddíl Krokodýli a patříme do skautského střediska Krále Jiřího Poděbrady 218.07
+# O nás
+---------------------------
+
+#### Jsme 3.oddíl Krokodýli a patříme do skautského střediska Krále Jiřího Poděbrady 218.07
 
 Do našeho oddílu chodí kluci od 5 let, kteří si rádi hrají, mají rádi přírodu a nějaká nepřízeň počasí je jen tak nerozhodí.
 
