@@ -1,4 +1,4 @@
-## Naše činnost
+# Naše činnost
 ----------------------------------------------------------
 
 Základním kamenem našeho programu jsou oddílové schůzky, vlčácké schůzky se konají každý čtvrtek od 17:00 do 18:30 hodin v klubovně na Skupici, skauti se scházejí každé úterý od 17:00 do 19:00h v klubovně ve Vekém Zboží. 
