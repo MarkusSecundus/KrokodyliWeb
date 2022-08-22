@@ -51,12 +51,12 @@
             new("Podzimní Robinzonáda", SampleImg2, "podzimni-robinzonada"),
             new("Nymburská plácačka", SampleImg3, "placacka"),
             new("Oheň sv. Jiří", SampleImg2, "sv-jiri"),
-            new("Brigáda VZ", SampleImg1, "sv-jiri"),
+            new("Brigáda VZ", SampleImg1, "brigada-vz"),
             }
         ),
         new (new Entry[]{
             new("Tábor 2021", SampleImg2, "tabor-2021"),
-            new("Podzimní Robinzonáda", SampleImg3, "velikonocni-robinzonada")
+            new("Podzimní Robinzonáda", SampleImg3, "podzimni-robinzonada")
         }),
         new (new Entry[]{
             new("Tábor 2020", SampleImg2, "tabor-2020"),
@@ -77,6 +77,6 @@
 
     private void ToSubpage(Entry e)
     {
-        navigationManager.NavigateTo($"fotogalery/e.Address");
+        navigationManager.NavigateTo($"fotogalery/{e.Address}");
     }
 }
