@@ -1,7 +1,7 @@
 # Kontakty
 ---------------------
 
-#### Martina Barvířová  *(Hlavní vedoucí)*
+#### Martina Barvířová  *- Hlavní vedoucí*
 605 485 388  
 <krokodyli@skaut.cz>
     
