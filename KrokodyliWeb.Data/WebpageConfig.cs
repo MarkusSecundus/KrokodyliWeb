@@ -14,9 +14,9 @@ namespace KrokodyliWeb.Data
 
         public class MarkdownPagesInfo
         {
-            public string RootURI { get; init; } = @"https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/pages/";
+            public string RootURI { get; init; } = null!;
 
-            public string FileExtension { get; init; } = ".md";
+            public string FileExtension { get; init; } = null!;
         }
     }
 }
