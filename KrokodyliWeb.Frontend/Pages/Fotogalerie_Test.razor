@@ -11,10 +11,11 @@
     </div>
 </div>
 
+@*
 <ImagePool>
     <ImageGallery Images="@Imgs"/>
 </ImagePool>
-      
+  *@    
 
 
 
@@ -36,26 +37,4 @@
 
 
 @code {
-    ImageDescriptor[] Imgs = new ImageDescriptor[]
-    {
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/bg.jpg", "background"),
-        new ("./resources/pozvanka.png", "pozvánka"),
-        new ("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/bg.jpg", "background"),
-        new ("./resources/pozvanka.png", "pozvánka"),
-        new ("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/bg.jpg", "background"),
-        new ("./resources/pozvanka.png", "pozvánka"),
-        new ("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
-    };
-
-    private async Task evalUrlScript(string url)
-    {
-        var script = await http.GetStringAsync(url);
-        await js.InvokeVoidAsync("eval", script);
-    }
 }
