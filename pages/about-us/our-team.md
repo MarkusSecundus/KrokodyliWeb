@@ -14,6 +14,7 @@ _Kapitán_
 ### Pavel Stryja - Tyčka
 _Palubný_
 ![](https://dd06291c6c.cbaul-cdnwnd.com/0abdc7eb0737f25fe87fa1e4a28deb1c/200031559-dbb98dcb3e/1%20(43).JPG?s3=1)
+
 --------------------------
 
 ### Eliška Michlová
