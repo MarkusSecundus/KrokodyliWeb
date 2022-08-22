@@ -15,7 +15,14 @@ namespace KrokodyliWeb.Utils
         }
         public static string MarkdownToHtml(string markdown)
         {
-            return Markdown.ToHtml(markdown, MarkdownPipeline_LazyInit.Value);
+            var ret = Markdown.ToHtml(markdown, MarkdownPipeline_LazyInit.Value);
+            ret = BeautifyHtml(ret);
+            return ret;
+        }
+
+        private static string BeautifyHtml(string html)
+        {
+            return html.Replace("<ol>", @"<ol class=""list-group list-group-numbered text-white"">");
         }
     }
 }
