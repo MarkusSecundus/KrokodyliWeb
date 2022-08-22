@@ -1,0 +1,26 @@
+<PageLayout>
+  <Page name="Domů" href="index" />
+  <Dropdown name="O Nás">
+    <Page name="O Nás" href="pages/about-us" />
+    <Delimiter />
+    <Page name="Naše parta" href="pages/about-us/our-team" />
+    <Page name="Naše činnost" href="pages/about-us/our-work" />
+    <Page name="Kde nás najdete" href="pages/about-us/where-to-find-us" />
+  </Dropdown>
+  <Page name="Akce" href="events" />
+  <Page name="Tábor" href="pages/summer-camp" />
+  <Dropdown name="Pro členy">
+    <Page name="Pro členy" href="pages/for-members" />
+    <Delimiter />
+    <Page name="Kronika" href="pages/for-members/chronicles" />
+    <Page name="Bodování" href="pages/for-members/scores" />
+    <Page name="Stezka" href="pages/for-members/stezka" />
+    <Page name="Pomůcky na schůzky a akce" href="pages/for-members/accessories-list" />
+    <Page name="Kroj" href="pages/for-members/uniforms" />
+    <Page name="Čísla členů" href="for-members/numbering" />
+  </Dropdown>
+  <Page name="Fotogalerie" href="fotogalery" />
+  <Page name="Podpořte nás!" href="pages/how-to-support-us" />
+  <Page name="Odkazy" href="pages/references" />
+  <Page name="Kontakty" href="pages/contacts" />
+</PageLayout>
