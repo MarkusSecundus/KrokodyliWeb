@@ -1,15 +1,62 @@
 ﻿@page "/fotogalery"
 
+@inject NavigationManager navigationManager
+
+<div class="container">
+    <div class="row">
+    <div class="col-lg-12 text-center my-2">
+            <h3 class="py-3">Testovací stránka z fotogalerie</h3>
+    </div>
+    </div>
+</div>
 
 
+<div class="container">
+
+    <div class="portfolio-item row justify-content-center">
+        @foreach(var entry in Entries)
+        {
+            string address = $"/fotogalery/{entry.Address}";
+            <div class="card col-lg-3 col-md-4 col-6 col-sm-12 bg-transparent border-white" style="margin: 20px;"  @onclick="()=>ToSubpage(entry)">
+                <div class="card-body border-bottom">
+                    <h5 class="card-title">@entry.Name</h5>
+                </div>
+                <img class="card-img-bottom" src="@(entry.PreviewImg.Source)" alt="@(entry.PreviewImg.Alt)"/>
+            </div>
+        }
+    </div>
+</div>
+      
 
 @code {
-    const string FotogalerieURL = "www.zonerama.com/krokodyli";
+    private static readonly ImageDescriptor 
+            SampleImg1 = new("./resources/KrokodyliLogo.png", "Krokodyli"), 
+            SampleImg2 = new("./resources/bg.jpg", "background"), 
+            SampleImg4 = new("./resources/pozvanka.png", "pozvánka"), 
+            SampleImg3 = new("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo");
 
+    private Entry[] Entries = new Entry[]
+    {
+        new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+        new("Tábor 2022", SampleImg2, "tabor-2022"),
+        new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
+        new("Tábor 2021", SampleImg2, "tabor-2022"),
+        new("Podzimní Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
+        new("Tábor 2020", SampleImg2, "tabor-2022"),
+        new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+        new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
+        new("Tábor 2019", SampleImg2, "tabor-2022"),
+        new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+    };
 
+    private record class Entry(
+        string Name,
+        ImageDescriptor PreviewImg,
+        string Address
+    ){}
 
-
-
-
-
+    private void ToSubpage(Entry e)
+    {
+        navigationManager.NavigateTo($"fotogalery/e.Address");
+    }
 }
