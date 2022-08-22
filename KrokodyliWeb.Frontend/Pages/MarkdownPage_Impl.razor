@@ -1,0 +1,40 @@
+﻿@inject TranslationsCache cache
+@inject WebpageConfig cfg;
+@inject HttpClient http;
+
+@Content
+
+
+@code {
+    [Parameter]
+    public string? PageName { get; set; }
+
+    private MarkupString Content { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Content = await cache.GetData(cfg, http, PageName!);
+    }
+
+
+
+    public class TranslationsCache
+    {
+        private readonly Dictionary<string, MarkupString> _data = new();
+
+        public async ValueTask<MarkupString> GetData(WebpageConfig cfg, HttpClient http, string PageName)
+        {
+            if (_data.TryGetValue(PageName, out var immediateRet))
+                return immediateRet;
+
+            var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), PageName + cfg.MarkdownPagesConfig.FileExtension);
+
+            var markdown = await http.GetStringAsync(requestUri);
+
+            var html = MarkdownUtils.MarkdownToHtml(markdown);
+            return _data[PageName] = new MarkupString(html);
+        }
+    }
+
+
+}
