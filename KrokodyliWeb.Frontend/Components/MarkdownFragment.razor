@@ -1,20 +1,53 @@
 ﻿@inject TranslationsCache cache
 @inject WebpageConfig cfg;
 @inject HttpClient http;
+@inject EmbeddedResourceReader embeddedRdr
+@inject IModalService modals
+@inject IJSRuntime js
 
-@Content
+<div @ref="RootRef">
+    @Content
+</div>
 
 
 @code {
+    private ImagePool.Data? PoolData { get; set; } = new();
+
+
     [Parameter]
-    public string? PageName { get; set; }
+    public string PageName { get; set; } = null!;
+
+    [Parameter]
+    public bool ShouldExpandImagesOnClick { get; set; } = true;
 
     private MarkupString Content { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
-        Content = await cache.GetData(cfg, http, PageName!);
+        PoolData = new();
+        Content = await cache.GetData(cfg, http, PageName);
+        shouldInit = true;
     }
+
+    bool shouldInit = false;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (shouldInit)
+        {
+            PoolData ??= new();
+            var clickator = ShouldExpandImagesOnClick 
+                                ? DotNetObjectReference.Create(new JsImageClicker(modals, PoolData.Images)) 
+                                : null;
+
+            await js.InvokeAsync<string>("markdown_fragment.beautify", RootRef, clickator);
+            shouldInit = false;
+        }
+    }
+
+    private ElementReference RootRef { get; set; }
+
+
+
 
 
 
@@ -22,17 +55,17 @@
     {
         private readonly Dictionary<string, MarkupString> _data = new();
 
-        public async ValueTask<MarkupString> GetData(WebpageConfig cfg, HttpClient http, string PageName)
+        public async ValueTask<MarkupString> GetData(WebpageConfig cfg, HttpClient http, string pageName)
         {
-            if (_data.TryGetValue(PageName, out var immediateRet))
+            if (_data.TryGetValue(pageName, out var immediateRet))
                 return immediateRet;
 
-            var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), PageName + cfg.MarkdownPagesConfig.FileExtension);
+            var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), pageName + cfg.MarkdownPagesConfig.FileExtension);
 
             var markdown = await http.GetStringAsync(requestUri);
 
             var html = MarkdownUtils.MarkdownToHtml(markdown);
-            return _data[PageName] = new MarkupString(html);
+            return _data[pageName] = new MarkupString(html);
         }
     }
 

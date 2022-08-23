@@ -32,8 +32,8 @@ namespace KrokodyliWeb.Frontend
             builder.Services.AddSingleton<WebpageData>(sp =>data );
             builder.Services.AddSingleton<NavbarTreeConfig>(sp =>navbarTreeConfig);
             builder.Services.AddSingleton<ExtensionStorage>();
+            builder.Services.AddSingleton<EmbeddedResourceReader>();
             builder.Services.AddScoped<MarkdownFragment.TranslationsCache>();
-
 
             builder.Services.AddBlazoredModal();
             builder.Services.AddRadzen();
@@ -44,7 +44,7 @@ namespace KrokodyliWeb.Frontend
         private static async Task<T> LoadJson<T>(HttpClient http, string uri)
         {
             var jsonString = await http.GetStringNoCacheAsync(uri);
-            Console.WriteLine($"JSON({uri}):\n{jsonString}--------------------------------------------------------\n\n");
+            //Console.WriteLine($"JSON({uri}):\n{jsonString}--------------------------------------------------------\n\n");
             return JsonSerializer.Deserialize<T>(jsonString)!;
         }
         private static async Task<T> LoadXml<T>(HttpClient http, string uri)
