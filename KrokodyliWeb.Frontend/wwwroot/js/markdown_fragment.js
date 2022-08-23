@@ -10,9 +10,9 @@ window.markdown_fragment = {
             clickator.invokeMethodAsync('MakeCallback', self.attr('src'), self.attr('alt'))
                 .then(function (callback) {
                     self.click(function () {
-                    callback.invokeMethodAsync('Click');
+                        callback.invokeMethodAsync('Click');
+                    });
                 });
-            });
         });
     },
 
