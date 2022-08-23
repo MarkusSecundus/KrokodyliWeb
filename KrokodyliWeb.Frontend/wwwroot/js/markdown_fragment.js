@@ -7,7 +7,7 @@ window.markdown_fragment = {
     make_windows_clickable: function (root, clickator) {
         root.find('img').each(function () {
             const self = $(this);
-            clickator.invokeMethodAsync('MakeCallback', self.attr('src'), alt = self.attr('alt'))
+            clickator.invokeMethodAsync('MakeCallback', self.attr('src'), self.attr('alt'))
                 .then(function (callback) {
                     self.click(function () {
                     callback.invokeMethodAsync('Click');
