@@ -11,6 +11,7 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
     <PackageReference Include="MailKit" Version="3.3.0" />
     <PackageReference Include="Markdig" Version="0.30.3" />
+    <PackageReference Include="MarkusSecundus.Util" Version="1.0.7" />
   </ItemGroup>
 
 </Project>

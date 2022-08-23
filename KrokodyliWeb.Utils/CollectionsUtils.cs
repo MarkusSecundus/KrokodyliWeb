@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,6 +58,14 @@ namespace KrokodyliWeb.Utils
             => new ListView<T>(self);
 
 
+        public static string ReadEmbeddedResourceText(this Assembly self, string resourceName)
+        {
+            resourceName = self.GetName().Name + "." + resourceName;
+            using var stream = self.GetManifestResourceStream(resourceName);
+            if (stream == null) return null;
+            using var rdr = new StreamReader(stream);
+            return rdr.ReadToEnd();
+        }
 
 
         /*public static string MakeString<T>(this IEnumerable<T> self, string separator=", ")

@@ -16,9 +16,7 @@ namespace KrokodyliWeb.Utils
         }
         public static string MarkdownToHtml(string markdown)
         {
-            var ret = Markdown.ToHtml(markdown, MarkdownPipeline_LazyInit.Value);
-            ret = BeautifyHtml(ret);
-            return ret;
+            return Markdown.ToHtml(markdown, MarkdownPipeline_LazyInit.Value);
         }
 
 
