@@ -1,4 +1,6 @@
 ﻿using KrokodyliWeb.Data;
+using KrokodyliWeb.Utils;
+using MarkusSecundus.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,45 @@ namespace KrokodyliWeb.Backend
 {
     internal class RandomPlayground
     {
-        public void TestNavbarTreeConfig()
+
+        private class IntList : IIntrusiveLinkedList<IntList>
+        {
+            public int Value { get; }
+            public IntList Last { get; set; }
+            public IntList Next { get; set; }
+
+            public IntList(int value)
+            {
+                Value = value;
+                Last = Next = this;
+            }
+
+            public static implicit operator IntList(int i)=> new IntList(i);
+        }
+
+        public static void IntrusiveLinkedListTest()
+        {
+            IntList l = 1;
+
+            l = l.AppendList(2).AppendList(3);
+            wrt(l);
+            IntList l2 = 11;
+            l2.AppendList(12).AppendList(13);
+            wrt(l2);
+            l = l.AppendList(l2);
+            wrt(l);
+            ((IntList)34).AppendList(l);
+            wrt(l);
+            l = l.RemoveEnd();
+            wrt(l);
+            l =l.RemoveFirst();
+            wrt(l);
+
+            void wrt(IntList l) => Console.WriteLine($"{l.Iterate().Select(l => l.Value).MakeString()}");
+        }
+
+
+        public static void TestNavbarTreeConfig()
         {
             var c = new NavbarTreeConfig
             {

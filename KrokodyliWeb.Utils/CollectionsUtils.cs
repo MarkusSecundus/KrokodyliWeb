@@ -9,6 +9,7 @@ namespace KrokodyliWeb.Utils
 {
     public static class CollectionsUtils
     {
+        public static int i(this bool self) => self ? 1 : 0;
         public static IEnumerable<(T Value, int Index)> WithIndices<T>(this IEnumerable<T> self)
         {
             int index = 0;
