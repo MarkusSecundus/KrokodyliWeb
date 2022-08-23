@@ -23,21 +23,21 @@
     [Parameter]
     public string? Event{ get; set; }
     
-    ImageDescriptor[] Imgs = new ImageDescriptor[]
-    {
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/bg.jpg", "background"),
-        new ("./resources/pozvanka.png", "pozvánka"),
-        new ("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/bg.jpg", "background"),
-        new ("./resources/pozvanka.png", "pozvánka"),
-        new ("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
-        new ("./resources/KrokodyliLogo.png", "Krokodyli"),
-        new ("./resources/bg.jpg", "background"),
-        new ("./resources/pozvanka.png", "pozvánka"),
-        new ("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
-    };
+     DoubleLinkedList<ImageDescriptor> Imgs = DoubleLinkedList<ImageDescriptor>.FromArray
+     (
+        new ImageDescriptor("./resources/KrokodyliLogo.png", "Krokodyli"),
+        new ImageDescriptor("./resources/KrokodyliLogo.png", "Krokodyli"),
+        new ImageDescriptor("./resources/bg.jpg", "background"),
+        new ImageDescriptor("./resources/pozvanka.png", "pozvánka"),
+        new ImageDescriptor("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
+        new ImageDescriptor("./resources/KrokodyliLogo.png", "Krokodyli"),
+        new ImageDescriptor("./resources/bg.jpg", "background"),
+        new ImageDescriptor("./resources/pozvanka.png", "pozvánka"),
+        new ImageDescriptor("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo"),
+        new ImageDescriptor("./resources/KrokodyliLogo.png", "Krokodyli"),
+        new ImageDescriptor("./resources/bg.jpg", "background"),
+        new ImageDescriptor("./resources/pozvanka.png", "pozvánka"),
+        new ImageDescriptor("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo")
+     );
 
 }

@@ -16,7 +16,7 @@
     [Parameter]
     public ImageDescriptor Descr { get; set; } = new("", "");
 
-    private ListElementView<ImageDescriptor> DescriptorView { get; set; } = default!;
+    private DoubleLinkedList<ImageDescriptor> DescriptorView { get; set; } = default!;
 
     [Parameter]
     public string? Class { get; set; }
@@ -31,16 +31,15 @@
     {
         if (Descr == null) throw new ArgumentNullException(nameof(Descr));
 
+        DescriptorView = Descr;
         if (PoolData != null && Previewable)
-            DescriptorView = PoolData.Images.AddElement(Descr);
-        else
-            DescriptorView = Descr;
+            PoolData.Images = PoolData.Images.AppendList(DescriptorView);
     }
 
     private void ShowPreview()
     {
         if (!Previewable) return;
 
-        modals.ShowImagePreview(DescriptorView.Index, DescriptorView.List);
+        modals.ShowImagePreview(DescriptorView);
     }
 }

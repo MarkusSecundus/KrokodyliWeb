@@ -16,7 +16,8 @@ namespace KrokodyliWeb.Utils
     public static class IntrusiveLinkedListExtensions
     {
         public static bool IsSingle<T>(this T self) where T : class, IIntrusiveLinkedList<T>
-        {return ((self == self.Next).i() + (self == self.Last).i()) switch
+        {
+            return ((self == self.Next).i() + (self == self.Last).i()) switch
             {
                 2 => true,
                 0 => false,
@@ -26,7 +27,7 @@ namespace KrokodyliWeb.Utils
 
         public static T RemoveFirst<T>(this T self) where T: class, IIntrusiveLinkedList<T>
         {
-            if (self.IsSingle()) return null;
+            if (self == null || self.IsSingle()) return null;
             var ret = self.Next;
             self.Last.Next = self.Next;
             self.Next.Last = self.Last;
@@ -36,7 +37,7 @@ namespace KrokodyliWeb.Utils
 
         public static T RemoveEnd<T>(this T self) where T : class, IIntrusiveLinkedList<T>
         {
-            if (self.IsSingle()) return null;
+            if (self==null || self.IsSingle()) return null;
             self.Last.RemoveFirst();
             return self;
         }
@@ -57,6 +58,7 @@ namespace KrokodyliWeb.Utils
 
         public static IEnumerable<T> Iterate<T>(this T self) where T : class, IIntrusiveLinkedList<T>
         {
+            if (self == null) yield break;
             T it = self;
             do
             {
@@ -66,6 +68,7 @@ namespace KrokodyliWeb.Utils
         }
         public static IEnumerable<T> IterateBackwards<T>(this T self) where T : class, IIntrusiveLinkedList<T>
         {
+            if (self == null) yield break;
             T it = self;
             do
             {

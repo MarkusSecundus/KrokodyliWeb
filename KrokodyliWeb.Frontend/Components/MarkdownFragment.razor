@@ -35,7 +35,7 @@
         {
             PoolData ??= new();
             var clickator = ShouldExpandImagesOnClick 
-                                ? DotNetObjectReference.Create(new JsImageClicker(modals, PoolData.Images)) 
+                                ? DotNetObjectReference.Create(new JsImageClicker(modals, PoolData)) 
                                 : null;
 
             await js.InvokeAsync<string>("markdown_fragment.beautify", RootRef, clickator);

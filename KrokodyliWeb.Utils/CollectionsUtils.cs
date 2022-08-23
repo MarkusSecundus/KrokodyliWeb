@@ -28,6 +28,15 @@ namespace KrokodyliWeb.Utils
             return -1;
         }
 
+        public static bool CountIsLessThan<T>(this IEnumerable<T> self, int count)
+        {
+            foreach(var _ in self)
+            {
+                if (--count < 0) return false;
+            }
+            return true;
+        }
+
         public static IEnumerable<(T Value, int Index)> IterateSliceWithIndices<T>(this IReadOnlyList<T> self, int? begin, int? end=null)
         {
             int e = end??self.Count;
