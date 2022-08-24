@@ -1,8 +1,13 @@
-﻿@inject TranslationsCache cache
+﻿@using MarkusSecundus.Util
+@using static KrokodyliWeb.Utils.BasicUtils
+
+@inject TranslationsCache cache
 @inject WebpageConfig cfg;
 @inject HttpClient http;
 @inject IModalService modals
 @inject IJSRuntime js
+
+@implements IDisposable
 
 <div @ref="RootRef">
     @Content
@@ -10,8 +15,10 @@
 
 
 @code {
-    private ImagePool.Data? PoolData { get; set; } = new();
-
+    [CascadingParameter]
+    public ImagePool.Data PoolData { get; set; } = new();
+    private ImagePool.Data? oldPoolData = null;
+    private JsImageClicker Clickator;
 
     [Parameter]
     public string PageName { get; set; } = null!;
@@ -21,21 +28,26 @@
 
     private MarkupString Content { get; set; }
 
+
     protected override async Task OnParametersSetAsync()
     {
-        PoolData = new();
         Content = await cache.GetData(cfg, http, PageName);
+        Clickator?.Dispose();
+        Clickator = new(modals, PoolData);
         shouldInit = true;
+        debug("C");
     }
+    void debug(string s="")=> Console.WriteLine($"{s} {PageName}: [{PoolData.Images.Iterate().Select(i=>i.GetHashCode()+"["+i.Images.Select(i=>i.Source[^12..]).MakeString()+"]").MakeString()}]\n\n");
 
     bool shouldInit = false;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (shouldInit)
         {
+
             PoolData ??= new();
             var clickator = ShouldExpandImagesOnClick 
-                                ? DotNetObjectReference.Create(new JsImageClicker(modals, PoolData.Images)) 
+                                ? DotNetObjectReference.Create(Clickator) 
                                 : null;
 
             await js.InvokeAsync<string>("markdown_fragment.beautify", RootRef, clickator);
@@ -68,5 +80,9 @@
         }
     }
 
-
+    void IDisposable.Dispose()
+    {
+        Clickator?.Dispose();
+        debug("D");
+    }
 }

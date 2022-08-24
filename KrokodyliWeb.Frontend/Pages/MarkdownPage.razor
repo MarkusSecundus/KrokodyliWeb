@@ -9,7 +9,9 @@
         <p>Stránka nenalezena: <b>'@ActualPageName'</b></p>
     </ErrorContent>
     <ChildContent>
+        <ImagePool>
             <MarkdownFragment PageName="@ActualPageName" ShouldExpandImagesOnClick="@(ShouldExpandImagesOnClick??=true)" />
+        </ImagePool>
     </ChildContent>
 </ErrorBoundary>
 

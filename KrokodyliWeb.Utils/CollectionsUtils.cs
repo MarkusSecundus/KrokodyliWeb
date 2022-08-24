@@ -9,11 +9,19 @@ namespace KrokodyliWeb.Utils
 {
     public static class CollectionsUtils
     {
+
+        public static int i(this bool self) => self ? 1 : 0;
         public static IEnumerable<(T Value, int Index)> WithIndices<T>(this IEnumerable<T> self)
         {
             int index = 0;
             foreach (var item in self)
                 yield return (item, index++);
+        }
+
+        public static IEnumerable<T> Flatten<T>(this IEnumerable<IEnumerable<T>> self)
+        {
+            foreach (var it in self)
+                foreach (var y in it) yield return y;
         }
 
         public static int IndexOfFirst<T>(this IEnumerable<T> self, Func<T, bool> predicate)
@@ -25,6 +33,15 @@ namespace KrokodyliWeb.Utils
                 ++index;
             }
             return -1;
+        }
+
+        public static bool CountIsLessThan<T>(this IEnumerable<T> self, int count)
+        {
+            foreach(var _ in self)
+            {
+                if (--count < 0) return false;
+            }
+            return true;
         }
 
         public static IEnumerable<(T Value, int Index)> IterateSliceWithIndices<T>(this IReadOnlyList<T> self, int? begin, int? end=null)

@@ -5,10 +5,10 @@
 <div class="container">
 
     <div class="portfolio-item row justify-content-center">
-        @foreach(var (img, index) in ImagesView.IterateSliceWithIndices())
+        @foreach(var img in owned.IterateViews())
         {
             <div class="item selfie col-lg-3 col-md-4 col-6 col-sm-12 justify-content-center"  style="margin: 20px;">
-                <img class="img-fluid" src="@(img.Source)" alt="@(img.Alt)" @onclick="()=>PreviewImage(index)">
+                <img class="img-fluid" src="@(img.Value.Source)" alt="@(img.Value.Alt)" @onclick="()=>PreviewImage(img)">
             </div>
         }
     </div>
@@ -18,26 +18,30 @@
 
 @code {
     [CascadingParameter]
-    public ImagePool.Data? PoolData{ get; set; }
-
+    public ImagePool.Data PoolData { get; set; } = new();
+    private ImagePool.Data? oldPoolData;
 
     [Parameter]
-    public IReadOnlyList<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
-    private ListView<ImageDescriptor> ImagesView { get; set; } = ListView<ImageDescriptor>.Empty;
+    public IEnumerable<ImageDescriptor> Images { get; set; } = null!;
 
+    private ImageList owned;
 
     protected override void OnParametersSet()
     {
-        if (PoolData != null)
-            ImagesView = PoolData.Images.AddSegment(Images);
-        else
-            ImagesView = Images.AsView();
+        if(oldPoolData != null && owned != null)
+        {
+            oldPoolData.Images = owned.Remove();
+        }
+        oldPoolData = PoolData;
+
+        owned = new ImageList().AddImages(Images);
+        PoolData.Images = PoolData.Images.AppendList(owned);
     }
 
 
-    private void PreviewImage(int imageIndex)
+    private void PreviewImage(ImageList.View index)
     {
-        modals.ShowImagePreview(imageIndex, ImagesView.List);
+        modals.ShowImagePreview(index);
     }
 
 }

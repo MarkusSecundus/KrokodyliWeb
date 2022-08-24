@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,5 +38,12 @@ namespace KrokodyliWeb.Utils
 
         public static implicit operator ListElementView<T>(T elem) => new ListElementView<T>(new[] {elem}, 0);
         //public static implicit operator T(ListElementView<T> v) => v.Value;
+
+        public override bool Equals([NotNullWhen(true)] object obj) => obj is ListElementView<T> v && (this == v);
+        public override int GetHashCode() => (List, Index).GetHashCode();
+        public override string ToString() => $"<{Index}::{Value}>";
+
+        public static bool operator ==(ListElementView<T> a, ListElementView<T> b) => (a.List, a.Index) == (b.List, b.Index);
+        public static bool operator !=(ListElementView<T> a, ListElementView<T> b) => !(a == b);
     }
 }

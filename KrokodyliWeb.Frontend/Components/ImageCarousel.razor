@@ -4,10 +4,10 @@
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vw; max-height: 75vh;">
   <div class="carousel-inner">
-    @foreach(var (img, index) in Images.WithIndices())
-    {var cls = "carousel-item" + (index==ActiveImageIndex ? " active" : "");
+    @foreach(var img in ActiveImage.Iterate())
+    {var cls = "carousel-item" + (img==ActiveImage ? " active" : "");
         <div class="@cls">
-          <img src="@(img.Source)" class="d-block w-100" alt="@(img.Alt)">
+          <img src="@(img.Value.Source)" class="d-block w-100" alt="@(img.Value.Alt)">
         </div>   
     }
   </div>
@@ -28,18 +28,10 @@
 
 @code {
     [Parameter]
-    public IReadOnlyList<ImageDescriptor> Images { get; set; } = Array.Empty<ImageDescriptor>();
+    [EditorRequired]
+    public ImageList.View ActiveImage { get; set; }
 
-
-    [Parameter]
-    public int ActiveImageIndex { get; set; }
-
-    private bool IsSimple => Images.Count <= 1;
-
-    protected override void OnParametersSet()
-    {
-        if (ActiveImageIndex >= Images.Count || ActiveImageIndex < 0) ActiveImageIndex = 0; 
-    }
+    private bool IsSimple => ActiveImage.IsSimple;
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
