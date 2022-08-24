@@ -5,7 +5,7 @@
 <div class="container">
 
     <div class="portfolio-item row justify-content-center">
-        @foreach(var img in Images.Iterate())
+        @foreach(var img in owned.IterateViews())
         {
             <div class="item selfie col-lg-3 col-md-4 col-6 col-sm-12 justify-content-center"  style="margin: 20px;">
                 <img class="img-fluid" src="@(img.Value.Source)" alt="@(img.Value.Alt)" @onclick="()=>PreviewImage(img)">
@@ -18,21 +18,28 @@
 
 @code {
     [CascadingParameter]
-    public ImagePool.Data? PoolData{ get; set; }
-
+    public ImagePool.Data PoolData { get; set; } = new();
+    private ImagePool.Data? oldPoolData;
 
     [Parameter]
-    public DoubleLinkedList<ImageDescriptor>? Images { get; set; } = null;
+    public IEnumerable<ImageDescriptor> Images { get; set; } = null!;
 
+    private ImageList owned;
 
     protected override void OnParametersSet()
     {
-        if (PoolData != null)
-            PoolData.Images = PoolData.Images.AppendList(Images);
+        if(oldPoolData != null && owned != null)
+        {
+            oldPoolData.Images = owned.Remove();
+        }
+        oldPoolData = PoolData;
+
+        owned = new ImageList().AddImages(Images);
+        PoolData.Images = PoolData.Images.AppendList(owned);
     }
 
 
-    private void PreviewImage(DoubleLinkedList<ImageDescriptor> index)
+    private void PreviewImage(ImageList.View index)
     {
         modals.ShowImagePreview(index);
     }

@@ -27,11 +27,11 @@
 
 
 @code {
-
     [Parameter]
-    public DoubleLinkedList<ImageDescriptor>? ActiveImage { get; set; }
+    [EditorRequired]
+    public ImageList.View ActiveImage { get; set; }
 
-    private bool IsSimple => ActiveImage.Iterate().CountIsLessThan(1);
+    private bool IsSimple => ActiveImage.IsSimple;
 
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

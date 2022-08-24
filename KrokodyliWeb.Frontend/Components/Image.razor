@@ -1,4 +1,6 @@
-﻿@inject IModalService modals
+﻿@using static KrokodyliWeb.Utils.BasicUtils
+
+@inject IModalService modals
 
 <img class="@Class_value" src="@(DescriptorView.Value.Source)" alt="@(DescriptorView.Value.Alt)" @onclick="ShowPreview"/>
 
@@ -6,7 +8,8 @@
 
 @code {
     [CascadingParameter]
-    public ImagePool.Data? PoolData{ get; set; }
+    public ImagePool.Data PoolData { get; set; } = new();
+    private ImagePool.Data? oldPoolData;
 
     [Parameter]
     public string Source { set => Descr = Descr with { Source = value }; }
@@ -16,7 +19,7 @@
     [Parameter]
     public ImageDescriptor Descr { get; set; } = new("", "");
 
-    private DoubleLinkedList<ImageDescriptor> DescriptorView { get; set; } = default!;
+    private ImageList.View DescriptorView { get; set; }
 
     [Parameter]
     public string? Class { get; set; }
@@ -29,11 +32,14 @@
 
     protected override void OnParametersSet()
     {
-        if (Descr == null) throw new ArgumentNullException(nameof(Descr));
+        if (Previewable)
+        {
+            if (DescriptorView != default && oldPoolData != null) oldPoolData.Images = DescriptorView.Node.Remove();
+            oldPoolData = PoolData;
 
-        DescriptorView = Descr;
-        if (PoolData != null && Previewable)
-            PoolData.Images = PoolData.Images.AppendList(DescriptorView);
+            DescriptorView = new ImageList().AddImage(Descr);
+            PoolData.Images = PoolData.Images.AppendList(DescriptorView.Node);
+        }
     }
 
     private void ShowPreview()

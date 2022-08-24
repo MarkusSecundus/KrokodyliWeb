@@ -22,9 +22,9 @@
 @code {
     [Parameter]
     public string? Event{ get; set; }
-    
-     DoubleLinkedList<ImageDescriptor> Imgs = DoubleLinkedList<ImageDescriptor>.FromArray
-     (
+
+    ImageDescriptor[] Imgs = new[]
+    {
         new ImageDescriptor("./resources/KrokodyliLogo.png", "Krokodyli"),
         new ImageDescriptor("./resources/KrokodyliLogo.png", "Krokodyli"),
         new ImageDescriptor("./resources/bg.jpg", "background"),
@@ -38,6 +38,6 @@
         new ImageDescriptor("./resources/bg.jpg", "background"),
         new ImageDescriptor("./resources/pozvanka.png", "pozvánka"),
         new ImageDescriptor("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo")
-     );
+     };
 
 }
