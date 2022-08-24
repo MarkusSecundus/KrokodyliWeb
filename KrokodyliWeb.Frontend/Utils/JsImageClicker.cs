@@ -34,7 +34,7 @@ namespace KrokodyliWeb.Frontend.Utils
 
         public void Dispose()
         {
-            ImagePool.Images = added.Remove();
+            ImagePool.Images = added.Dispose();
             IsDisabled = true;
         }
 

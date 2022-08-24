@@ -34,7 +34,7 @@
     {
         if (Previewable)
         {
-            if (DescriptorView != default && oldPoolData != null) oldPoolData.Images = DescriptorView.Node.Remove();
+            if (DescriptorView != default && oldPoolData != null) oldPoolData.Images = DescriptorView.Node.Dispose();
             oldPoolData = PoolData;
 
             DescriptorView = new ImageList().AddImage(Descr);

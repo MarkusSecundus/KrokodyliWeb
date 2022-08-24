@@ -30,7 +30,7 @@
     {
         if(oldPoolData != null && owned != null)
         {
-            oldPoolData.Images = owned.Remove();
+            oldPoolData.Images = owned.Dispose();
         }
         oldPoolData = PoolData;
 

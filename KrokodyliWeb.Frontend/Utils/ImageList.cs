@@ -3,7 +3,7 @@ using KrokodyliWeb.Utils;
 
 namespace KrokodyliWeb.Frontend.Utils
 {
-    public class ImageList : IIntrusiveLinkedList<ImageList>
+    public class ImageList : IIntrusiveLinkedList<ImageList>, IDisposable
     {
         public IReadOnlyList<ImageDescriptor> Images => images;
 
@@ -19,7 +19,8 @@ namespace KrokodyliWeb.Frontend.Utils
         public ImageList Next { get; protected set; }
         public ImageList Last { get; protected set; }
 
-        public ImageList Remove()
+        void IDisposable.Dispose() => Dispose();
+        public ImageList Dispose()
         {
             images.Clear();
             return this.RemoveFirst();
@@ -43,8 +44,9 @@ namespace KrokodyliWeb.Frontend.Utils
             public ImageDescriptor Value => Node.Images[Index];
             public IEnumerable<View> Iterate()
             {
+                if (!IsValid) yield break;
                 for (int i = Index; i < Node.Images.Count; ++i) yield return new View(Node,i);
-                for (ImageList node = Node.Next; node != Node; node = node.Next)
+                for (ImageList node = Node.Next; node != Node && node != null; node = node.Next)
                     for(int i = 0;i<node.Images.Count;++i) yield return new View(node, i);
                 for (int i = 0; i < Index; ++i) yield return new View(Node, i);
             }
