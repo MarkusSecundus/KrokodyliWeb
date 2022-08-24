@@ -14,8 +14,10 @@ namespace KrokodyliWeb.Frontend.Utils
             Next = Last = this;
         }
 
-        public ImageList Next { get; set; }
-        public ImageList Last { get; set; }
+        ImageList IIntrusiveLinkedList<ImageList>.Next { get => Next; set => Next = value; }
+        ImageList IIntrusiveLinkedList<ImageList>.Last { get => Next; set => Next = value; }
+        public ImageList Next { get; protected set; }
+        public ImageList Last { get; protected set; }
 
         public ImageList Remove()
         {

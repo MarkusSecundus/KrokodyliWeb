@@ -8,8 +8,8 @@ namespace KrokodyliWeb.Utils
 {
     public interface IIntrusiveLinkedList<TSelf> where TSelf: class, IIntrusiveLinkedList<TSelf>
     {
-        public TSelf Last { get; internal set; }
-        public TSelf Next { get; internal set; }
+        public TSelf Last { get; internal protected set; }
+        public TSelf Next { get; internal protected set; }
     }
 
 
