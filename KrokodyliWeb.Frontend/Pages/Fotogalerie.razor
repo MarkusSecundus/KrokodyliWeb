@@ -1,17 +1,82 @@
 ﻿@page "/fotogalery"
 
-<center><h3 id="title">Fotogalerie</h3></center>
+@inject NavigationManager navigationManager
 
-Fotogalerie je umístěna na <a href="https://@FotogalerieURL">@FotogalerieURL</a>
- 
-Najdete tam fotky z akcí a táborů, vše je přehledně rozděleno do jednotlivých skautských roků, 
-tábory jsou pak v samostatné složce. 
- 
-Neváhejte a prohlížejte!
+<div class="container">
+    <div class="row">
+    <div class="col-lg-12 text-center my-2">
+            <h3 class="py-3">Testovací stránka z fotogalerie</h3>
+    </div>
+    </div>
+</div>
 
 
-Více zde: <a class="linkhref" href="https://krokodyli.webnode.cz/fotogalerie/">https://krokodyli.webnode.cz/fotogalerie/</a>
+<div class="container">
+
+    <div class="portfolio-item row justify-content-center">
+        @foreach(var year in Entries)
+        {
+            <div class="container border-top">
+                <div class="row  justify-content-center">
+                @foreach(var entry in year.Entries)
+                {
+                    string address = $"/fotogalery/{entry.Address}";
+                    <div class="card col-lg-3 col-md-4 col-6 col-sm-12 bg-transparent border-white" style="margin: 20px;"  @onclick="()=>ToSubpage(entry)">
+                        <div class="card-body border-bottom">
+                            <h5 class="card-title">@entry.Name</h5>
+                        </div>
+                        <img class="card-img-bottom" src="@(entry.PreviewImg.Source)" alt="@(entry.PreviewImg.Alt)"/>
+                    </div>
+                }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+      
 
 @code {
-    const string FotogalerieURL = "www.zonerama.com/krokodyli";
+    private static readonly ImageDescriptor 
+            SampleImg1 = new("./resources/KrokodyliLogo.png", "Krokodyli"), 
+            SampleImg2 = new("./resources/bg.jpg", "background"), 
+            SampleImg4 = new("./resources/pozvanka.png", "pozvánka"), 
+            SampleImg3 = new("./resources/zvadlo_novacci2020_web.jpg", "Zvadlo");
+
+    private Year[] Entries = new Year[]
+    {
+        new (new Entry[]{
+            new("Tábor 2022", SampleImg2, "tabor-2022"),
+            new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+            new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada"),
+            new("Podzimní Robinzonáda", SampleImg2, "podzimni-robinzonada"),
+            new("Nymburská plácačka", SampleImg3, "placacka"),
+            new("Oheň sv. Jiří", SampleImg2, "sv-jiri"),
+            new("Brigáda VZ", SampleImg1, "brigada-vz"),
+            }
+        ),
+        new (new Entry[]{
+            new("Tábor 2021", SampleImg2, "tabor-2021"),
+            new("Podzimní Robinzonáda", SampleImg3, "podzimni-robinzonada")
+        }),
+        new (new Entry[]{
+            new("Tábor 2020", SampleImg2, "tabor-2020"),
+            new("První Jarní Celodenní", SampleImg1, "prvni-jarni-celodenni"),
+            new("Velikonoční Robinzonáda", SampleImg3, "velikonocni-robinzonada")
+        }),
+        
+        
+    };
+
+    private record class Year(Entry[] Entries){}
+
+    private record class Entry(
+        string Name,
+        ImageDescriptor PreviewImg,
+        string Address
+    ){}
+
+    private void ToSubpage(Entry e)
+    {
+        navigationManager.NavigateTo($"fotogalery/{e.Address}");
+    }
 }

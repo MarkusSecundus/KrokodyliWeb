@@ -1,0 +1,88 @@
+﻿@using MarkusSecundus.Util
+@using static KrokodyliWeb.Utils.BasicUtils
+
+@inject TranslationsCache cache
+@inject WebpageConfig cfg;
+@inject HttpClient http;
+@inject IModalService modals
+@inject IJSRuntime js
+
+@implements IDisposable
+
+<div @ref="RootRef">
+    @Content
+</div>
+
+
+@code {
+    [CascadingParameter]
+    public ImagePool.Data PoolData { get; set; } = new();
+    private ImagePool.Data? oldPoolData = null;
+    private JsImageClicker Clickator;
+
+    [Parameter]
+    public string PageName { get; set; } = null!;
+
+    [Parameter]
+    public bool ShouldExpandImagesOnClick { get; set; } = true;
+
+    private MarkupString Content { get; set; }
+
+
+    protected override async Task OnParametersSetAsync()
+    {
+        Content = await cache.GetData(cfg, http, PageName);
+        Clickator?.Dispose();
+        Clickator = new(modals, PoolData);
+        shouldInit = true;
+        debug("C");
+    }
+    void debug(string s="")=> Console.WriteLine($"{s} {PageName}: [{PoolData.Images.Iterate().Select(i=>i.GetHashCode()+"["+i.Images.Select(i=>i.Source[^12..]).MakeString()+"]").MakeString()}]\n\n");
+
+    bool shouldInit = false;
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (shouldInit)
+        {
+
+            PoolData ??= new();
+            var clickator = ShouldExpandImagesOnClick 
+                                ? DotNetObjectReference.Create(Clickator) 
+                                : null;
+
+            await js.InvokeAsync<string>("markdown_fragment.beautify", RootRef, clickator);
+            shouldInit = false;
+        }
+    }
+
+    private ElementReference RootRef { get; set; }
+
+
+
+
+
+
+    public class TranslationsCache
+    {
+        private readonly Dictionary<string, MarkupString> _data = new();
+
+        public async ValueTask<MarkupString> GetData(WebpageConfig cfg, HttpClient http, string pageName)
+        {
+            if (_data.TryGetValue(pageName, out var immediateRet))
+                return immediateRet;
+
+            var requestUri = new Uri(new Uri(cfg.MarkdownPagesConfig.RootURI), pageName + cfg.MarkdownPagesConfig.FileExtension);
+
+            var markdown = await http.GetStringAsync(requestUri);
+
+            var html = MarkdownUtils.MarkdownToHtml(markdown);
+            return _data[pageName] = new MarkupString(html);
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        Clickator?.Dispose();
+        debug("D");
+    }
+}

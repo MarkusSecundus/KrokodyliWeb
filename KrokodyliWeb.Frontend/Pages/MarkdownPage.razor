@@ -1,0 +1,43 @@
+﻿@page "/"
+@page "/index"
+@page "/pages/{*pageName}"
+
+@inject NavigationManager nav
+
+<ErrorBoundary>
+    <ErrorContent> 
+        <p>Stránka nenalezena: <b>'@ActualPageName'</b></p>
+    </ErrorContent>
+    <ChildContent>
+        <ImagePool>
+            <MarkdownFragment PageName="@ActualPageName" ShouldExpandImagesOnClick="@(ShouldExpandImagesOnClick??=true)" />
+        </ImagePool>
+    </ChildContent>
+</ErrorBoundary>
+
+
+
+
+@code {
+    [Parameter]
+    public string? PageName { get; set; }
+
+    public string ActualPageName => PageName ??= "index";
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "ClickableImgs")]
+    public bool? ShouldExpandImagesOnClick { get; set; } = true;
+
+
+    private bool firstTimeParametersSet = true;
+    protected override void OnParametersSet()
+    {
+        if (!firstTimeParametersSet)
+        {
+
+        }
+
+        firstTimeParametersSet = false;
+    }
+
+}

@@ -8,11 +8,13 @@ namespace KrokodyliWeb.Data
 {
     public class WebpageData
     {
+        public string OrganisationName { get; set; } = null!;
         public List<ScoutYearInfo> Years { get; set; } = new();
 
         public List<ContactsInfo> Contacts { get; set; } = new();
 
 
+        public Dictionary<int, string> MembershipNumbers { get; set; } = new();
 
 
         public class ScoutYearInfo

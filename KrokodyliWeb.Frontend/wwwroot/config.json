@@ -1,3 +1,8 @@
 {
-  "DataFileURI": "https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/data.json"
+  "DataFileURI": "https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/data.json",
+  "NavbarTreeConfigURI": "https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/page-layout.xml",
+  "MarkdownPagesConfig": {
+    "RootURI": "https://raw.githubusercontent.com/MarkusSecundus/KrokodyliWeb/data/pages/",
+    "FileExtension": ".md"
+  }
 }
