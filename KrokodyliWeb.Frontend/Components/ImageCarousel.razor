@@ -2,12 +2,12 @@
 @inject IJSRuntime js
 
 
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vw; max-height: 75vh;">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="@DimStyle">
   <div class="carousel-inner">
     @foreach(var img in ActiveImage.Iterate())
     {var cls = "carousel-item" + (img==ActiveImage ? " active" : "");
-        <div class="@cls">
-          <img src="@(img.Value.Source)" class="d-block w-100" alt="@(img.Value.Alt)">
+        <div class="@cls" style="max-width: 25%; max-height: 25%; ">
+          <img src="@(img.Value.Source)" style="object-fit: contain;"  alt="@(img.Value.Alt)">
         </div>   
     }
   </div>
@@ -33,13 +33,15 @@
 
     private bool IsSimple => ActiveImage.IsSimple;
 
+    private const int MaxDim = 90;
+    private static readonly string DimStyle = $"max-width: {MaxDim}vw; max-height: {MaxDim}vh;";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && !this.IsSimple)
         {
             await js.InvokeAsync<object>("eval", @"
-    //$('#carouselExampleIndicators').carousel({interval: 2000});
+    $('#carouselExampleIndicators').carousel({interval: 200000});
 
     //see step 2 to understand these news id's:
     $('.carousel-control-prev').click ( 
