@@ -3,11 +3,11 @@
 
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vw; max-height: 75vh;">
-    <div class="carousel-inner" style="max-width: 100%; max-height: 100%;">
+    <div class="carousel-inner" style="max-width: 100%; max-height: 100%; position: relative;">
     @foreach(var img in ActiveImage.Iterate())
     {var cls = "carousel-item" + (img==ActiveImage ? " active" : "");
-        <div class="@cls">
-          <img src="@(img.Value.Source)" class="d-block" style="max-width: 100%; max-height: 100%;" alt="@(img.Value.Alt)">
+            <div class="@cls" style="max-width: 100%; max-height: 100%;">
+                <img src="@(img.Value.Source)" class="d-block" style="max-width: 100%; max-height: 100%;" alt="@(img.Value.Alt)">
         </div>   
     }
   </div>
@@ -27,9 +27,9 @@
 
 
 @code {
-    [Parameter]
-    [EditorRequired]
-    public ImageList.View ActiveImage { get; set; }
+        [Parameter]
+        [EditorRequired]
+        public ImageList.View ActiveImage { get; set; }
 
     private bool IsSimple => ActiveImage.IsSimple;
 
@@ -45,7 +45,19 @@
     $('.carousel-control-prev').click ( 
             () => $('#carouselExampleIndicators').carousel('prev') );
     $('.carousel-control-next').click ( 
-            () => $('#carouselExampleIndicators').carousel('next') );");
+            () => $('#carouselExampleIndicators').carousel('next') );
+
+
+    let parent = $('#carouselExampleIndicators');
+    let resizeEvent = ()=>{
+        let w = parent.width();
+        let h = parent.height();
+        console.log('width: ' + w);
+        console.log('height: ' + h);
+        $('#carouselExampleIndicators .carousel-item img').attr('style', 'max-width: ' + w + 'px; max-height: ' + h + 'px;');
+    };
+    resizeEvent();
+");
         }
     }
 }
