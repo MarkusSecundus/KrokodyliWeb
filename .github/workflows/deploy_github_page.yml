@@ -23,7 +23,7 @@ jobs:
     - name: Publish Frontend project
       run: dotnet publish KrokodyliWeb.Frontend -c Release -o release --nologo
     - name: create repo_info.json
-      run: printf '{"UserName": "MarkusSecundus", "RepoName": "KrokodyliWeb" }'
+      run: printf '{"UserName"%c "%s", "RepoName"%c "KrokodyliWeb" }' 58 ${{ github.repository_owner }} 58 ${{ github.event.repository.name }} > release/wwwroot/repo_info.json
       
     - id: create_sed_input
       uses: mathiasvr/command-output@v1
