@@ -23,7 +23,7 @@ jobs:
     - name: Publish Frontend project
       run: dotnet publish KrokodyliWeb.Frontend -c Release -o release --nologo
     - name: set repo_info.json
-      run: printf '{"UserName"\x3A "%s", "RepoName"\x3A "KrokodyliWeb" }\n' ${{ github.repository_owner }} ${{ github.event.repository.name }} > release/wwwroot/repo_info.json
+      run: printf '{"UserName"\x3A "%s", "RepoName"\x3A "%s" }\n' ${{ github.repository_owner }} ${{ github.event.repository.name }} > release/wwwroot/repo_info.json
       
     - name: copy index.html to 404.html
       run: cp release/wwwroot/index.html release/wwwroot/404.html
