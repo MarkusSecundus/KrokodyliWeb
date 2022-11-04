@@ -7,10 +7,11 @@
     <title>KrokodyliWeb.Frontend</title>
     <base href="/" />
     <script>
-        let repoPart = '/' + (await(await fetch('repo_info.json')).json()).GithubInfo.RepoName;
-        $('head  base').attr('href', window.location.pathname.startsWith(repoPart)? repoPart : '/');
+        
+        document.querySelector('head base').setAttribute('href', '/KrokodyliWeb');
+                //let repoPart = '/' + (await(await fetch('repo_info.json')).json()).GithubInfo.RepoName;
+                //$('head  base').attr('href', window.location.pathname.startsWith(repoPart)? repoPart : '/');
     </script>
-
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <!--<link href="KrokodyliWeb.Frontend.styles.css" rel="stylesheet" />-->
