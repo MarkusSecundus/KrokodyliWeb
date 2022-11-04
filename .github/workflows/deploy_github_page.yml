@@ -22,12 +22,8 @@ jobs:
     
     - name: Publish Frontend project
       run: dotnet publish KrokodyliWeb.Frontend -c Release -o release --nologo
-    - id: create_sed_input
-      uses: mathiasvr/command-output@v1
-      with: 
-        run: printf "'%s%s%s'" 's/<base href="\/" \/>/<base href="\/' ${{ github.event.repository.name }} '\/" \/>/g' 
-    - name: Change base-tag in index.html from / to /KrokodyliWeb
-      run: sed -i ${{ steps.create_sed_input.outputs.stdout }} release/wwwroot/index.html
+    - name: set repo_info.json
+      run: printf '{"UserName"\x3A "%s", "RepoName"\x3A "%s" }\n' ${{ github.repository_owner }} ${{ github.event.repository.name }} > release/wwwroot/repo_info.json
       
     - name: copy index.html to 404.html
       run: cp release/wwwroot/index.html release/wwwroot/404.html
