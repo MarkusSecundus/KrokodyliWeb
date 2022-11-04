@@ -3,11 +3,11 @@
 
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 75vw; max-height: 75vh;">
-  <div class="carousel-inner">
+    <div class="carousel-inner" style="max-width: 100%; max-height: 100%;">
     @foreach(var img in ActiveImage.Iterate())
     {var cls = "carousel-item" + (img==ActiveImage ? " active" : "");
         <div class="@cls">
-          <img src="@(img.Value.Source)" class="d-block w-100" alt="@(img.Value.Alt)">
+          <img src="@(img.Value.Source)" class="d-block" style="max-width: 100%; max-height: 100%;" alt="@(img.Value.Alt)">
         </div>   
     }
   </div>
@@ -39,7 +39,7 @@
         if (firstRender && !this.IsSimple)
         {
             await js.InvokeAsync<object>("eval", @"
-    //$('#carouselExampleIndicators').carousel({interval: 2000});
+    $('#carouselExampleIndicators').carousel({interval: false});
 
     //see step 2 to understand these news id's:
     $('.carousel-control-prev').click ( 
