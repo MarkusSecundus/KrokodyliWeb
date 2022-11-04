@@ -14,6 +14,15 @@ jobs:
       with: 
         ref: 'gh-pages'
         path: './page'
+        
+    - id: create_sed_input
+      uses: mathiasvr/command-output@v1
+      with: 
+        run: printf "'%s%s%s'" 's/<base href="\/' ${{ github.event.repository.name }} '\/" \/>/<base href="\/" \/>/g' 
+    - name: Change base-tag in index.html from /KrokodyliWeb to /
+      run: sed -i ${{ steps.create_sed_input.outputs.stdout }} ./page/index.html
+      
+      
     - run: sudo apt install ncftp
     - run: ncftpput -R -u '${{ secrets.LEBEDA_FTP_USERNAME }}' -p '${{ secrets.LEBEDA_FTP_PASSWORD }}' lebedahosting.cz www './page'
   
