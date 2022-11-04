@@ -1,4 +1,4 @@
-name: Run Backend
+name: Deploy to Lebeda
 
 on:
   workflow_dispatch:
