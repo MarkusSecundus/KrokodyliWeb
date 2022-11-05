@@ -1,7 +1,9 @@
 <PageLayout>
   <Page name="Domů" href="index" />
   <Dropdown name="O Nás">
-    <Page name="O Nás" href="pages/about-us" />
+    <Page name="O Nás" href="pages/about-us">
+        <Param name="ClickableImgs" value="true"/>
+    </Page>
     <Delimiter />
     <Page name="Naše parta" href="pages/about-us/our-team">
         <Param name="ClickableImgs" value="false"/>
