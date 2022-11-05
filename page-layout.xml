@@ -3,7 +3,9 @@
   <Dropdown name="O Nás">
     <Page name="O Nás" href="pages/about-us" />
     <Delimiter />
-    <Page name="Naše parta" href="pages/about-us/our-team/?ClickableImgs=true" />
+    <Page name="Naše parta" href="pages/about-us/our-team">
+        <Param name="ClickableImgs" value="false"/>
+    </Page>
     <Page name="Naše činnost" href="pages/about-us/our-work" />
     <Page name="Kde nás najdete" href="pages/about-us/where-to-find-us" />
   </Dropdown>
