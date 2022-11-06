@@ -25,6 +25,18 @@ namespace KrokodyliWeb.Data
             public string Name { get; set; } = null!;
             [XmlAttribute("href")]
             public string Href { get; set; } = null!;
+
+            [XmlElement("Param", typeof(QueryParameter))]
+            public List<QueryParameter> Parameters { get; set; } = new();
+
+            public class QueryParameter
+            {
+                [XmlAttribute("name")]
+                public string Name { get; set; } = null!;
+
+                [XmlAttribute("value")]
+                public string Value { get; set; } = null!;
+            }
         }
 
         public sealed class DropdownNode : Node

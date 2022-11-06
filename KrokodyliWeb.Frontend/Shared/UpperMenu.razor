@@ -1,4 +1,5 @@
-﻿@inject NavbarTreeConfig tree
+﻿@using Microsoft.AspNetCore.WebUtilities
+@inject NavbarTreeConfig tree
 @inject WebpageData data
 
 
@@ -32,7 +33,7 @@
 
     private RenderFragment Button(NavbarTreeConfig.SimpleNode n) => __builder =>
     {
-    <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@(n.Href)">@(n.Name)</a></li>
+    <li class="nav-item"><a class="nav-link text-white" id="uppermenu_btn" href="@(MakeUri(n))">@(n.Name)</a></li>
     };
 
     private RenderFragment Dropdown(NavbarTreeConfig.DropdownNode n) => __builder =>
@@ -44,15 +45,19 @@
             {
                 @if(o is NavbarTreeConfig.Delimiter)
                 {
-                    <div class="dropdown-divider"></div>
-                }
-                else if(o is NavbarTreeConfig.SimpleNode simple)
-                {
-                    <a class="dropdown-item" href="@(simple.Href)">@(simple.Name)</a>
+                        <div class="dropdown-divider"></div>
+                    }
+                    else if(o is NavbarTreeConfig.SimpleNode simple)
+                    {
+                        <a class="dropdown-item" href="@(MakeUri(simple))">@(simple.Name)</a>
                 }
             }
             </div>
         </li>
     };
 
+    private string MakeUri(NavbarTreeConfig.SimpleNode n)
+    {
+        return n.Parameters.Aggregate(n.Href, (acc, p) => QueryHelpers.AddQueryString(acc, p.Name, p.Value));
+    }
 }
