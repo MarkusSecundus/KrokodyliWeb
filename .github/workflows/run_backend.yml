@@ -2,8 +2,8 @@ name: Run Backend
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17,47 6-23,0 * * 6'
+#  schedule:
+#    - cron: '17,47 6-23,0 * * 6'
   
 
 jobs:
