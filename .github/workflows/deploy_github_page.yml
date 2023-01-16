@@ -23,6 +23,13 @@ jobs:
     - name: Publish Frontend project
       run: dotnet publish KrokodyliWeb.Frontend -c Release -o release --nologo
       
+    - name: Commit raw result
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: pages-raw
+        FOLDER: release/wwwroot
+      
     - id: create_sed_input
       uses: mathiasvr/command-output@v1
       with: 
